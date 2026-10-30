@@ -35,13 +35,13 @@ tasks:
 	$(ADLC) eval --lint
 
 tier1:
-	$(ADLC) eval --tier 1 --runs 3 --results results
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --runs 3 --results results --out tier1.jsonl
 
 tier2:
-	$(ADLC) eval --tier 2 --runs 3 --results results
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 2 --runs 3 --results results --out tier2.jsonl
 
 tier3:
-	$(ADLC) eval --tier 3 --runs 3 --results results
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 3 --runs 3 --results results --out tier3.jsonl
 
 scorecard:
 	$(ADLC) scorecard --results results --out results/scorecard.md --html results/scorecard.html
@@ -50,7 +50,7 @@ monitor:
 	$(ADLC) stale --all; $(ADLC) regress --dry-run; $(ADLC) scorecard --trend --results results
 
 adoption:
-	$(ADLC) eval --adoption-test repos/kestrel-notify
+	$(ADLC) eval --adoption-test repos/kestrel-notify --tasks $(KIT)/harness/adoption/tasks --task nfy-001 --results results
 
 all: kit org init doctor baseline federate tasks tier1 scorecard
 

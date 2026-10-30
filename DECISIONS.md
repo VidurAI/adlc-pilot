@@ -167,3 +167,7 @@ everything here is reversible by the pilot owner.
 - **Rubric lesson from the smoke task:** a 0/1/2 rubric must define the 1 for partial
   answers in *both* directions (code-only and UI-only), otherwise the judge scores a
   half-right answer 0. Added to the task review checklist.
+- **Adoption test runs on the dev machine, not in the devcontainer** (no Docker). Same
+  kit, same ADOPT.md steps, same clock; the stranger's AGENTS.md prose is supplied as
+  `ADOPTION_PROSE.md` so the run is reproducible. The devcontainer variant is listed under
+  "could not complete".
