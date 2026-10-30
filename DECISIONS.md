@@ -140,3 +140,9 @@ everything here is reversible by the pilot owner.
   on a .NET-8-only machine). Devcontainer installs the .NET 10 runtime next to the .NET 8
   SDK. `pyright` is fetched lazily by Serena at first use (0 B pre-download) — acceptable;
   the first Serena start on a Python repo pays ~0.5 min once per image.
+- **Copilot hook protocol (verified):** a preToolUse hook's stdout JSON
+  `{"permissionDecision":"deny","permissionDecisionReason":"…"}` blocks the tool and the
+  reason reaches the model; `{"permissionDecision":"allow","additionalContext":"…"}` lets
+  it run and injects the text. `adlc guard-hook` adapts graphify's `hook-guard read|search`
+  (Claude-Code-shaped `tool_input`) to this; strict denies only `read` (graphify never
+  blocks searches), non-strict nudges. Fails open if graphify is missing.

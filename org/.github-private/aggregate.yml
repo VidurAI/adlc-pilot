@@ -1,0 +1,5 @@
+# Repos whose adlc-trend artifacts the org aggregator collects.
+repos:
+  - kestrel-freight/kestrel-services
+  - kestrel-freight/kestrel-web
+  - kestrel-freight/kestrel-ops

@@ -1,0 +1,39 @@
+# Org aggregator: collects every repo's uploaded trend.jsonl artifact and renders ONE
+# cross-repo scorecard — what a platform lead looks at. Runs after the weekly regress.
+name: adlc-aggregate
+on:
+  schedule: [{ cron: "0 6 * * 1" }]
+  workflow_dispatch:
+  repository_dispatch: { types: [adlc-project-federated] }
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    permissions: { contents: write, actions: read }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv tool install --python 3.12 "git+https://github.com/kestrel-freight/adlc-kit@v0.1.0"
+      - name: collect trends from member repos
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          mkdir -p trends
+          for repo in $(yq '.repos[]' aggregate.yml); do
+            id=$(gh api repos/$repo --jq .id)
+            gh run download --repo "$repo" --name "adlc-trend-$id" --dir "trends/$(basename $repo)" || echo "no trend for $repo"
+          done
+      - run: adlc scorecard --aggregate trends --out SCORECARD.md --html SCORECARD.html
+      - run: |
+          git config user.name adlc-bot; git config user.email adlc-bot@users.noreply.github.com
+          git add SCORECARD.md SCORECARD.html && (git diff --cached --quiet || git commit -m "adlc: org scorecard [skip ci]") && git push
+  federate-org:
+    if: github.event_name == 'repository_dispatch'
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv tool install --python 3.12 "git+https://github.com/kestrel-freight/adlc-kit@v0.1.0"
+      - run: adlc federate --level org --fetch --out .
+      - run: |
+          git config user.name adlc-bot; git config user.email adlc-bot@users.noreply.github.com
+          git add org-graph.json ORG_REPORT.md && (git diff --cached --quiet || git commit -m "adlc: federate org [skip ci]") && git push
