@@ -171,3 +171,13 @@ everything here is reversible by the pilot owner.
   kit, same ADOPT.md steps, same clock; the stranger's AGENTS.md prose is supplied as
   `ADOPTION_PROSE.md` so the run is reproducible. The devcontainer variant is listed under
   "could not complete".
+- **Skill size is a measurable cost; not changed mid-tier.** Graphify's Copilot skill is
+  48 KB (`SKILL.md`, ~12k tokens) plus 48 KB of references. In the first Tier 1 records a
+  `literal` task cost ~100k prompt tokens in the graphify arms vs ~46k in baseline/serena
+  — the arm read the skill, then grepped exactly as the routing policy says. Decision:
+  keep the vendor skill verbatim for the pilot so the measurement is of Graphify as
+  shipped; file a kit follow-up `adlc init --skill-profile lean` (query/path/explain +
+  freshness preamble only, ~4 KB) to be A/B'd as its own arm after Tier 1.
+- **Edit tasks carry overlay tests** (fail on the pristine repo, pass after the reference
+  fix; verified per task in scratch clones). Without them every edit task's test command
+  already exited 0 before any change, so tests could not distinguish a fix from inaction.
