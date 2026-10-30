@@ -1,4 +1,4 @@
-# Project graph — kestrel  (2026-10-30T13:41:06+00:00)
+# Project graph — kestrel  (2026-10-30T13:45:54+00:00)
 
 - 2188 nodes · 5374 edges · kit 0.1.0
 

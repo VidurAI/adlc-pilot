@@ -154,3 +154,16 @@ everything here is reversible by the pilot owner.
 - **Kit tagged `v0.1.0`** after the harness dry-run suite passed. Phase 8 retags on each
   adoption-test fix (`v0.1.1`, …). The `uv tool install git+<url>@v0.1.0` in ADOPT.md
   refers to the intended GitHub location; the pilot installs from the local path.
+- **Arm purity is enforced by stripping, not by trust.** In the first live smoke run the
+  `serena` arm ran `graphify query` through bash (AGENTS.md told it to, and
+  `graphify-out/` was there). Each arm now removes the other context's files from the
+  working copy (`graphify-out/`, the skill, `.mcp.json`, `.serena/`) and filters the
+  kit-owned routing section to the tools that arm has; `baseline` is AGENTS.md prose
+  only. Freshness is read from the pristine repo before stripping.
+- **"Tokens" in the scorecard = prompt tokens = input + cache_read + cache_write.**
+  Copilot's `input.tokenCount` is only the uncached slice (15–40 tokens per run in the
+  smoke test while cache reads were 72k–371k). Output tokens are separate; the uncached
+  slice is still shown.
+- **Rubric lesson from the smoke task:** a 0/1/2 rubric must define the 1 for partial
+  answers in *both* directions (code-only and UI-only), otherwise the judge scores a
+  half-right answer 0. Added to the task review checklist.

@@ -90,6 +90,24 @@ PLANS: dict[str, list[tuple[list[str], str, str]]] = {
         (["tickets/BOOK-*", "tickets/GW-*"], "tickets: booking and gateway notes", "platform"),
         (["tickets/*"], "tickets: pricing, web, ops notes", "platform"),
     ],
+    "notify": [
+        (["pyproject.toml", ".gitignore", "README.md", "CODEOWNERS"], "chore: scaffold notify service", "platform"),
+        (["notify/__init__.py", "notify/settings.py", "notify/models.py"], "notify: settings and wire models", "platform"),
+        (["notify/signature.py"], "notify: HMAC webhook signature verification", "platform"),
+        (["notify/ratelimit.py"], "notify: per-recipient rate limit", "platform"),
+        (["notify/legacy_fanout.py"], "notify: keep legacy fan-out for reference", "platform"),
+        (["notify/channels/base.py", "notify/channels/__init__.py"], "notify: channel interface", "platform"),
+        (["notify/channels/email.py", "notify/channels/sms.py"], "notify: email + sms channels (outbox stubs)", "platform"),
+        (["notify/channels/webhook.py"], "notify: webhook channel", "platform"),
+        (["notify/templates/**/*", "notify/templates/*"], "notify: event templates", "web"),
+        (["notify/queue.py"], "notify: retry queue with dead-letter (OPS-61)", "platform"),
+        (["notify/service.py"], "notify: enqueue/dispatch service", "platform"),
+        (["notify/**/*"], "notify: FastAPI app and routes", "platform"),
+        (["tests/conftest.py", "tests/test_signature*", "tests/test_ratelimit*"], "tests: signature + rate limit", "platform"),
+        (["tests/test_channel*", "tests/test_webhook*"], "tests: channels and webhook", "platform"),
+        (["tests/test_queue*", "tests/test_service*"], "tests: queue and service", "platform"),
+        (["tests/**/*"], "tests: routes and models", "platform"),
+    ],
 }
 
 
