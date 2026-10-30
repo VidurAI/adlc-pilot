@@ -1,0 +1,10 @@
+.toolchain/dotnet/
+.toolchain/dotnet-install.sh
+.venv/
+__pycache__/
+*.pyc
+results/runs/
+# nested git repos (each has its own history)
+adlc-kit/
+repos/
+org/kestrel-project/.git/
