@@ -65,6 +65,23 @@ runs; it has not yet been stressed by drift.
 owner; `adlc scorecard --spotcheck results/spotcheck.md` prints agreement. Edit tasks are
 judged by overlay tests, not by the model.
 
+## Results — Tier 2 (Java booking + C# pricing, 3 tasks × 4 arms × 3 runs = 36 runs)
+| arm | n | prompt tokens p50 | calls p50 | wall p50 | correctness | Serena used | graph queried |
+|---|---|---|---|---|---|---|---|
+| baseline | 9 | 115k | 6 | 30s | 78% | — | — |
+| serena | 9 | 127k | 7 | 30s | 72% | 0/9 | — |
+| graphify | 9 | 230k | 8 | 33s | 100% | — | 1/9 |
+| graphify-guard | 9 | 265k | 9 | 36s | 89% | — | 2/9 |
+
+Per task: svc-002 (locate, C#) 100/83/100/100 %; svc-009 (edit, C# rounding) 100 % in all
+arms; **svc-010 (edit, Java JPA `@ManyToOne`) 33/33/100/67 %** — the only Tier 1+2 cell where
+a context arm clearly beat baseline on correctness (n=3 per cell; baseline and serena
+failed the overlay test twice each). Serena was again unused in 0/9 runs, so the Java/C#
+hypothesis ("symbol tools matter where grep is weakest") is untested, not refuted.
+Graphify arms queried the graph in only 1–2 of 9 runs here; the svc-010 win came with the
+skill loaded but mostly without graph queries — the mechanism is unclear and the sample
+is small. Thresholds below are unchanged by Tier 2.
+
 ## Thresholds (set FROM baseline numbers)
 Adopt an arm for a category when, within the same resolved model and over ≥ 3 runs:
 prompt tokens p50 ≤ 0.8 × baseline (Tier 1 baseline: 87k → ≤ 70k), correctness ≥

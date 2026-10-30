@@ -21,6 +21,16 @@ prompt × multiplier, cross-checked with the stdout result event (#1582 concerns
 unused); bytes-read is a proxy; model `auto` recorded per run (10/144 runs also used a
 `copilot-search-a` helper); every cell is a median over 3 runs.
 
+### Tier 2 (Java/C#, 3 tasks × 4 arms × 3 runs = 36 runs)
+| arm | n | prompt tokens p50 | calls p50 | wall p50 | correctness |
+|---|---|---|---|---|---|
+| baseline | 9 | 115k | 6 | 30s | 78% |
+| serena | 9 | 127k | 7 | 30s | 72% |
+| graphify | 9 | 230k | 8 | 33s | 100% |
+| graphify-guard | 9 | 265k | 9 | 36s | 89% |
+Serena used 0/9; graph queried 1–2/9. One clear context win: svc-010 (Java JPA edit) 100 %
+graphify vs 33 % baseline, n=3 per cell.
+
 ## 2. Per arm
 - **baseline** — won tokens and wall in every category; lost one edit (web-009). Cost: zero.
 - **serena** — statistically indistinguishable from baseline because the agent used Serena's
@@ -41,7 +51,7 @@ step pre-supplied (≈5 min typing in reality). Kit fixes needed: 0. Final tag: 
 (feature release). Run on the dev machine — no Docker, so not in the devcontainer.
 
 ## 5. Not completed
-- Tier 2 (Java/C#, 36 runs) and Tier 3 (KB + federated, 135 runs) still running;
+- Tier 2 done (above). Tier 3 (KB + federated, 135 runs) still running;
   `make tier2 tier3 scorecard` resumes. The `both` arm was not run: no arm beat baseline.
 - Devcontainer image never built; `act` not run (no Docker). Workflows verified by a stub runner.
 - Copilot model pinning unavailable on this account (auto, recorded per run).
