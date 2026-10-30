@@ -1,0 +1,2 @@
+{"type": "assistant.message", "data": {"content": "dry-run answer"}}
+{"type": "result", "sessionId": "stub-session", "exitCode": 0, "usage": {"premiumRequests": 1, "totalApiDurationMs": 1200, "sessionDurationMs": 2000, "codeChanges": {"linesAdded": 0, "linesRemoved": 0, "filesModified": []}}}

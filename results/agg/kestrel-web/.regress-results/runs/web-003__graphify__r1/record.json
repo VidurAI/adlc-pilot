@@ -1,0 +1,52 @@
+{
+  "run_id": "web-003__graphify__r1",
+  "task": "web-003",
+  "repo": "kestrel-web",
+  "category": "trace",
+  "languages": [
+    "typescript"
+  ],
+  "tier": 1,
+  "arm": "graphify",
+  "run": 1,
+  "started_at": "2026-10-30T13:50:10+00:00",
+  "exit_code": 0,
+  "wall_ms": 0,
+  "api_duration_ms": 5520,
+  "prompt_tokens": 28783,
+  "input_tokens": 6,
+  "output_tokens": 237,
+  "cache_read_tokens": 23819,
+  "cache_write_tokens": 4958,
+  "reasoning_tokens": 211,
+  "premium_requests": 1,
+  "premium_requests_stdout": 1,
+  "premium_reason": null,
+  "model_calls": 2,
+  "premium_cost_sum": 2.0,
+  "nano_aiu": 97704000,
+  "models": [
+    "gpt-6-luna"
+  ],
+  "copilot_version": "1.0.105",
+  "turns": 2,
+  "tool_calls": {
+    "skill": 1
+  },
+  "mcp_tool_calls": {},
+  "bytes_read": 0,
+  "skills_invoked": [
+    "alpha-skill"
+  ],
+  "graph_queries": 0,
+  "freshness_exit": 0,
+  "freshness_behind": 0,
+  "answer": "dry-run answer",
+  "judge_score": 2,
+  "diff_hash": "7f7326d8de38a656",
+  "diff_lines": 185,
+  "raw": "runs/web-003__graphify__r1",
+  "judge_reason": "stub",
+  "judge_premium_requests": 0,
+  "dry_run": true
+}
