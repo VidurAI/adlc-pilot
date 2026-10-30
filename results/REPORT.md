@@ -1,4 +1,4 @@
-# ADLC pilot report — Tier 1 complete (2026-10-30)
+# ADLC pilot report — all tiers (2026-10-30)
 
 Reproduce every number: `make kit org init doctor baseline federate tasks tier1 scorecard`
 (Tier 2/3: `make tier2 tier3 scorecard`, resumable). Scorecard: `results/scorecard.md`.
@@ -30,6 +30,37 @@ unused); bytes-read is a proxy; model `auto` recorded per run (10/144 runs also 
 | graphify-guard | 9 | 265k | 9 | 36s | 89% |
 Serena used 0/9; graph queried 1–2/9. One clear context win: svc-010 (Java JPA edit) 100 %
 graphify vs 33 % baseline, n=3 per cell.
+
+### Tier 3 (KB, cross-repo, cross-project; 15 tasks × 3 arms × 3 runs = 135 attempted, 126 valid)
+Arms: baseline, graphify, graphify-federated (graphify + `project-graph.json` so `adlc query --level`
+works). The `both` arm was not run: no arm beat baseline alone in Tiers 1–2. **web-008's 9 runs are
+excluded**: the account's monthly Copilot premium-request quota ran out during them (`session.error`
+"exceeded your monthly quota"); they cannot be re-run this month.
+
+| arm | n | prompt tokens p50 / p90 | calls p50 | wall p50 / p90 | correctness | graph queried |
+|---|---|---|---|---|---|---|
+| baseline | 42 | 59k / 113k | 4 | 18.2s / 31.6s | 79% | 0/42 |
+| graphify | 42 | 191k / 434k | 6 | 35.6s / 69.3s | 77% | 37/42 |
+| graphify-federated | 42 | 230k / 487k | 7 | 40.8s / 76.6s | 85% | 36/42 |
+
+| category | baseline | graphify | graphify-federated |
+|---|---|---|---|
+| archaeology | 90%; 56k (n=15) | 80%; 186k (n=15) | 90%; 200k (n=15) |
+| cross-repo | 50%; 102k (n=9) | 56%; 373k (n=9) | 67%; 271k (n=9) |
+| cross-project | 94%; 71k (n=9) | 94%; 199k (n=9) | 100%; 246k (n=9) |
+| locate | 75%; 55k (n=6) | 83%; 166k (n=6) | 75%; 154k (n=6) |
+| literal | 67%; 28k (n=3) | 67%; 71k (n=3) | 83%; 29k (n=3) |
+
+**Knowledge base (kestrel-ops, 10 tasks × 3 runs per arm):** baseline 90% at 55k / graphify 87% at 169k / graphify-federated 93% at 171k. A 40-file docs repo fits in
+Copilot's context, so the LLM-built docs graph (7.5 min, 35 model calls to build) did not pay for
+itself; the federated arm's edge is within noise. **Federated impact question** (ops-008, "who is
+affected if pricing changes /v1/quote"): the federated arm called `adlc query --level` 3–5 times per
+run and scored 100 % in all 3 runs, as did baseline — the question was answerable from CODEOWNERS plus
+grep on this small org. **Cross-repo** (web-006/007, svc-007): the hardest category for every arm
+(50 / 56 / 67 %); web-007 (the `reference` vs `client_reference` idempotency bug) scored 17 % baseline vs
+50 % federated (3 runs each) — the one place the project graph plausibly helped; n=3 per cell.
+
+**Totals across tiers:** 315 runs attempted, 306 valid; agent premium requests (billing) 306, judge premium requests 246, model calls 2074, prompt tokens 56.3 M, agent wall-clock 2.9 h.
 
 ## 2. Per arm
 - **baseline** — won tokens and wall in every category; lost one edit (web-009). Cost: zero.

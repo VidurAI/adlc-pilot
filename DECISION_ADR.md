@@ -1,7 +1,7 @@
 # DECISION_ADR.md — repo-context layer for Copilot: adopt, and how
 
-Status: PROPOSED — Tier 1 complete (144 runs, 2026-10-30). Numbers below are copied from
-`results/scorecard.md` (reproduce: `make tier1 scorecard`). Tier 2/3 sections marked ⏳.
+Status: PROPOSED — all tiers complete (315 runs attempted, 306 valid, 2026-10-30). Numbers are
+copied from `results/scorecard.md` (reproduce: `make tier1 tier2 tier3 scorecard`).
 
 ## Context
 Kestrel Freight's agent is GitHub Copilot CLI. The question was whether a repo-context
@@ -82,6 +82,37 @@ Graphify arms queried the graph in only 1–2 of 9 runs here; the svc-010 win ca
 skill loaded but mostly without graph queries — the mechanism is unclear and the sample
 is small. Thresholds below are unchanged by Tier 2.
 
+## Results — Tier 3 (KB, cross-repo, cross-project; 15 tasks × 3 arms × 3 runs = 135 attempted, 126 valid)
+Arms: baseline, graphify, graphify-federated (graphify + `project-graph.json` so `adlc query --level`
+works). The `both` arm was not run: no arm beat baseline alone in Tiers 1–2. **web-008's 9 runs are
+excluded**: the account's monthly Copilot premium-request quota ran out during them (`session.error`
+"exceeded your monthly quota"); they cannot be re-run this month.
+
+| arm | n | prompt tokens p50 / p90 | calls p50 | wall p50 / p90 | correctness | graph queried |
+|---|---|---|---|---|---|---|
+| baseline | 42 | 59k / 113k | 4 | 18.2s / 31.6s | 79% | 0/42 |
+| graphify | 42 | 191k / 434k | 6 | 35.6s / 69.3s | 77% | 37/42 |
+| graphify-federated | 42 | 230k / 487k | 7 | 40.8s / 76.6s | 85% | 36/42 |
+
+| category | baseline | graphify | graphify-federated |
+|---|---|---|---|
+| archaeology | 90%; 56k (n=15) | 80%; 186k (n=15) | 90%; 200k (n=15) |
+| cross-repo | 50%; 102k (n=9) | 56%; 373k (n=9) | 67%; 271k (n=9) |
+| cross-project | 94%; 71k (n=9) | 94%; 199k (n=9) | 100%; 246k (n=9) |
+| locate | 75%; 55k (n=6) | 83%; 166k (n=6) | 75%; 154k (n=6) |
+| literal | 67%; 28k (n=3) | 67%; 71k (n=3) | 83%; 29k (n=3) |
+
+**Knowledge base (kestrel-ops, 10 tasks × 3 runs per arm):** baseline 90% at 55k / graphify 87% at 169k / graphify-federated 93% at 171k. A 40-file docs repo fits in
+Copilot's context, so the LLM-built docs graph (7.5 min, 35 model calls to build) did not pay for
+itself; the federated arm's edge is within noise. **Federated impact question** (ops-008, "who is
+affected if pricing changes /v1/quote"): the federated arm called `adlc query --level` 3–5 times per
+run and scored 100 % in all 3 runs, as did baseline — the question was answerable from CODEOWNERS plus
+grep on this small org. **Cross-repo** (web-006/007, svc-007): the hardest category for every arm
+(50 / 56 / 67 %); web-007 (the `reference` vs `client_reference` idempotency bug) scored 17 % baseline vs
+50 % federated (3 runs each) — the one place the project graph plausibly helped; n=3 per cell.
+
+**Totals across tiers:** 315 runs attempted, 306 valid; agent premium requests (billing) 306, judge premium requests 246, model calls 2074, prompt tokens 56.3 M, agent wall-clock 2.9 h.
+
 ## Thresholds (set FROM baseline numbers)
 Adopt an arm for a category when, within the same resolved model and over ≥ 3 runs:
 prompt tokens p50 ≤ 0.8 × baseline (Tier 1 baseline: 87k → ≤ 70k), correctness ≥
@@ -105,8 +136,10 @@ Graphify arms fail tokens and wall in every category.
    Next experiment: a Serena arm whose routing section *requires* `find_referencing_symbols`
    for trace tasks, and the Java/C# tasks (Tier 2 ⏳) where grep is weakest.
 4. The hierarchy (L1/L2) is kept: it is cheap (1.4 s build, 0 ambiguous contract edges on
-   Kestrel) and answers questions no single-repo tool can; its value is measured in
-   Tier 3 ⏳, not assumed.
+   Kestrel) and answers questions no single-repo tool can. Tier 3 shows the federated arm
+   actually using `adlc query --level` and a small edge on cross-repo tasks (67 % vs 50 %,
+   n=12), at 3.8× baseline tokens; on an org this small the same questions were mostly
+   answerable from CODEOWNERS + grep. Its value is a bet on org size, not a Kestrel result.
 
 ## Operating cost per tool (measured where marked)
 | Item | Cost | Measured? |
@@ -114,7 +147,7 @@ Graphify arms fail tokens and wall in every category.
 | L0 graph build (code only, no LLM) | kestrel-services 1584 nodes in 5.8 s; kestrel-web 2.2 s; kestrel-ops stamp-only | yes |
 | Docs semantic pass (`/graphify .` in a Copilot session, 43 files) | 7 min 27 s, 35 model calls, 1 premium request, 2.96 M input tokens (2.84 M cache reads) | yes — `results/docs-pass.json` |
 | L1 federation (3 repos, 4 resolvers) | 1.4 s; http-contract 29 edges / 0 ambiguous after prefix resolution; doc-reference 243 edges | yes |
-| L1 resolver false-positive rate | ⏳ (hand-check of the 29 contract edges against the spec: expected 100 % for Kestrel; the number that decides whether Graphify Cloud's cross-repo graph is worth paying for) | partial |
+| L1 resolver false-positive rate | 29 http-contract edges, 0 ambiguous; every provider→consumer pair in PROJECT_REPORT.md matches the spec's contract table (16 routes, 10 consumed) — 0 false positives on Kestrel; this is the number that decides whether Graphify Cloud's cross-repo graph is worth paying for | yes (by inspection of the report) |
 | Serena language servers | pinned by Serena commit; jdtls download 322 MB, ts-ls 25 MB, pyright lazy, Roslyn needs .NET 10 runtime | yes (download), first-activation latency ⏳ |
 | Devcontainer image | Dockerfile authored; **not built** (no Docker on pilot machine); estimate 3–4 GB | no |
 | Serena licence | GPL-3.0-or-later (application) / MIT (SolidLSP). Run as a separate process, shipped in the image with source URL + commit. **Legal review required before org-wide rollout.** | n/a |
@@ -125,10 +158,11 @@ the kit's CLI surface and workflows. Graphify and Serena sit behind `adlc baseli
 `.mcp.json`; removing either touches the kit, not a consuming repo's prose.
 
 ## Non-code knowledge
-Served: the kestrel-ops docs pass produced 53 document, 24 concept and 16 rationale
-nodes; archaeology tasks are the test. Gap: the semantic pass is a Copilot-session-only
-step (never headless by policy), so docs freshness lags code freshness — the KB currency
-line reports it. ⏳ measured on the kestrel-ops tasks in Tier 3.
+Served, but not better than reading: the kestrel-ops docs pass produced 53 document, 24
+concept and 16 rationale nodes, and the arms with it scored 87–93 % on the 10 KB tasks vs
+90 % for baseline reading markdown directly, at 3× the tokens. At 40 files the KB fits in
+context; the docs graph is a bet on corpus size. Gap confirmed: the semantic pass is a
+Copilot-session-only step (never headless by policy), so docs freshness lags code freshness.
 
 ## Graphify Cloud — procurement questions (asked before any purchase)
 1. Data location and access: where do graphs and source excerpts live, who at the vendor can read them, is there a single-tenant option?

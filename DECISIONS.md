@@ -188,3 +188,13 @@ everything here is reversible by the pilot owner.
   they are the vendor-neutral part and cost nothing per task.
 - **Model stratification worked as designed:** 10 of 144 runs also used a
   `copilot-search-a` helper model under `auto`; the scorecard lists them separately.
+- **Copilot monthly premium quota ran out in the last 9 runs (web-008, all three Tier 3
+  arms).** Each ended with `session.error "exceeded your monthly quota"`, exit 1, no
+  answer; their judge calls failed too. They are excluded (listed, never pooled) by
+  `adlc scorecard`, which now treats any run with a session error or a non-zero exit
+  and no answer as invalid. `adlc eval` now aborts on the first session error instead of
+  burning the remaining matrix. Totals: 315 attempted, 306 valid, 306 agent + 246 judge
+  premium requests, 2,074 model calls, 56.3 M prompt tokens, 2.9 h of agent wall-clock.
+  web-008 re-runs next month (`make tier3` resumes).
+- **The `both` arm was not run**, per the spec's condition: no context arm beat baseline
+  alone in Tiers 1–2.
