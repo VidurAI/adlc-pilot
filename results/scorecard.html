@@ -1,0 +1,103 @@
+<!doctype html><meta charset='utf-8'><title>ADLC scorecard</title><style>body{font:14px system-ui;max-width:1200px;margin:2rem auto}table{border-collapse:collapse;margin:1rem 0}td{border:1px solid #ccc;padding:3px 8px;font-variant-numeric:tabular-nums}</style><h1>ADLC scorecard</h1>
+<p>144 runs · tasks 12 · arms [&#x27;baseline&#x27;, &#x27;graphify&#x27;, &#x27;graphify-guard&#x27;, &#x27;serena&#x27;]</p>
+<h2>By arm</h2>
+<table><tr><td>arm</td><td>n</td><td>prompt tokens p50/p90</td><td>(uncached in p50)</td><td>out p50</td><td>calls p50</td><td>premium p50</td><td>wall p50/p90</td><td>turns p50</td><td>bytes read p50</td><td>correctness</td><td>edit pass</td><td>tokens CV</td></tr>
+<tr><td>baseline</td><td>36</td><td>87,374/167,288</td><td>15</td><td>1,414</td><td>5</td><td>1</td><td>19.3s/39.7s</td><td>5</td><td>12,932</td><td>86%</td><td>89%</td><td>0.49</td></tr>
+<tr><td>graphify</td><td>36</td><td>203,980/318,737</td><td>21</td><td>2,014</td><td>7</td><td>1</td><td>31.4s/60.4s</td><td>7</td><td>13,796</td><td>85%</td><td>100%</td><td>0.38</td></tr>
+<tr><td>graphify-guard</td><td>36</td><td>241,516/461,881</td><td>24</td><td>2,209</td><td>8</td><td>1</td><td>38.6s/75.6s</td><td>8</td><td>14,238</td><td>82%</td><td>100%</td><td>0.51</td></tr>
+<tr><td>serena</td><td>36</td><td>76,446/181,870</td><td>15</td><td>1,325</td><td>5</td><td>1</td><td>20.1s/44.3s</td><td>5</td><td>10,638</td><td>89%</td><td>100%</td><td>0.58</td></tr></table>
+<h2>By arm × category</h2>
+<table><tr><td>arm</td><td>category</td><td>n</td><td>prompt tokens p50/p90</td><td>(uncached in p50)</td><td>out p50</td><td>calls p50</td><td>premium p50</td><td>wall p50/p90</td><td>turns p50</td><td>bytes read p50</td><td>correctness</td><td>edit pass</td><td>tokens CV</td></tr>
+<tr><td>baseline</td><td>edit</td><td>9</td><td>162,925/182,733</td><td>24</td><td>2,253</td><td>8</td><td>1</td><td>36.9s/49.5s</td><td>8</td><td>14,544</td><td>89%</td><td>89%</td><td>0.08</td></tr>
+<tr><td>baseline</td><td>literal</td><td>9</td><td>46,534/64,006</td><td>9</td><td>428</td><td>3</td><td>1</td><td>10.0s/12.1s</td><td>3</td><td>854</td><td>83%</td><td>—</td><td>0.29</td></tr>
+<tr><td>baseline</td><td>locate</td><td>3</td><td>62,697/76,656</td><td>15</td><td>758</td><td>5</td><td>1</td><td>15.7s/17.0s</td><td>5</td><td>3,207</td><td>100%</td><td>—</td><td>0.23</td></tr>
+<tr><td>baseline</td><td>trace</td><td>15</td><td>88,730/105,605</td><td>15</td><td>1,523</td><td>5</td><td>1</td><td>23.1s/32.3s</td><td>5</td><td>16,026</td><td>83%</td><td>—</td><td>0.19</td></tr>
+<tr><td>graphify</td><td>edit</td><td>9</td><td>279,125/326,717</td><td>27</td><td>3,005</td><td>9</td><td>1</td><td>48.8s/63.1s</td><td>9</td><td>13,863</td><td>100%</td><td>100%</td><td>0.14</td></tr>
+<tr><td>graphify</td><td>literal</td><td>9</td><td>130,764/167,298</td><td>15</td><td>738</td><td>5</td><td>1</td><td>16.4s/18.9s</td><td>5</td><td>3,167</td><td>83%</td><td>—</td><td>0.25</td></tr>
+<tr><td>graphify</td><td>locate</td><td>3</td><td>135,639/185,675</td><td>15</td><td>1,096</td><td>5</td><td>1</td><td>21.5s/29.5s</td><td>5</td><td>11,674</td><td>100%</td><td>—</td><td>0.19</td></tr>
+<tr><td>graphify</td><td>trace</td><td>15</td><td>205,432/324,818</td><td>21</td><td>2,224</td><td>7</td><td>1</td><td>32.3s/59.7s</td><td>7</td><td>24,957</td><td>73%</td><td>—</td><td>0.32</td></tr>
+<tr><td>graphify-guard</td><td>edit</td><td>9</td><td>277,275/292,744</td><td>27</td><td>2,803</td><td>9</td><td>1</td><td>47.4s/67.4s</td><td>9</td><td>13,339</td><td>100%</td><td>100%</td><td>0.10</td></tr>
+<tr><td>graphify-guard</td><td>literal</td><td>9</td><td>103,750/167,967</td><td>12</td><td>581</td><td>4</td><td>1</td><td>13.1s/19.9s</td><td>4</td><td>2,942</td><td>89%</td><td>—</td><td>0.28</td></tr>
+<tr><td>graphify-guard</td><td>locate</td><td>3</td><td>163,877/185,964</td><td>18</td><td>1,199</td><td>6</td><td>1</td><td>23.4s/24.2s</td><td>6</td><td>12,297</td><td>67%</td><td>—</td><td>0.14</td></tr>
+<tr><td>graphify-guard</td><td>trace</td><td>15</td><td>407,615/504,546</td><td>36</td><td>3,975</td><td>12</td><td>1</td><td>61.3s/86.4s</td><td>12</td><td>34,310</td><td>70%</td><td>—</td><td>0.36</td></tr>
+<tr><td>serena</td><td>edit</td><td>9</td><td>173,671/213,654</td><td>3,824</td><td>2,710</td><td>8</td><td>1</td><td>44.0s/71.1s</td><td>8</td><td>14,172</td><td>100%</td><td>100%</td><td>0.15</td></tr>
+<tr><td>serena</td><td>literal</td><td>9</td><td>45,332/55,343</td><td>9</td><td>246</td><td>3</td><td>1</td><td>10.4s/11.5s</td><td>3</td><td>474</td><td>83%</td><td>—</td><td>0.26</td></tr>
+<tr><td>serena</td><td>locate</td><td>3</td><td>62,255/62,770</td><td>12</td><td>604</td><td>4</td><td>1</td><td>16.0s/18.4s</td><td>4</td><td>4,324</td><td>100%</td><td>—</td><td>0.01</td></tr>
+<tr><td>serena</td><td>trace</td><td>15</td><td>86,540/106,090</td><td>15</td><td>1,583</td><td>5</td><td>1</td><td>22.0s/27.9s</td><td>5</td><td>14,652</td><td>83%</td><td>—</td><td>0.23</td></tr></table>
+<h2>By arm × language</h2>
+<table><tr><td>arm</td><td>languages</td><td>n</td><td>prompt tokens p50/p90</td><td>(uncached in p50)</td><td>out p50</td><td>calls p50</td><td>premium p50</td><td>wall p50/p90</td><td>turns p50</td><td>bytes read p50</td><td>correctness</td><td>edit pass</td><td>tokens CV</td></tr>
+<tr><td>baseline</td><td>python</td><td>15</td><td>63,117/174,871</td><td>15</td><td>1,454</td><td>5</td><td>1</td><td>17.6s/36.8s</td><td>5</td><td>13,640</td><td>77%</td><td>100%</td><td>0.62</td></tr>
+<tr><td>baseline</td><td>typescript</td><td>21</td><td>88,730/160,040</td><td>15</td><td>1,375</td><td>5</td><td>1</td><td>23.1s/42.4s</td><td>5</td><td>12,225</td><td>93%</td><td>83%</td><td>0.40</td></tr>
+<tr><td>graphify</td><td>python</td><td>15</td><td>205,086/302,452</td><td>21</td><td>2,224</td><td>7</td><td>1</td><td>31.3s/53.6s</td><td>7</td><td>15,175</td><td>70%</td><td>100%</td><td>0.43</td></tr>
+<tr><td>graphify</td><td>typescript</td><td>21</td><td>199,404/322,824</td><td>21</td><td>2,005</td><td>7</td><td>1</td><td>31.5s/60.9s</td><td>7</td><td>11,906</td><td>95%</td><td>100%</td><td>0.33</td></tr>
+<tr><td>graphify-guard</td><td>python</td><td>15</td><td>218,310/396,124</td><td>21</td><td>2,194</td><td>7</td><td>1</td><td>35.3s/61.3s</td><td>7</td><td>13,339</td><td>77%</td><td>100%</td><td>0.52</td></tr>
+<tr><td>graphify-guard</td><td>typescript</td><td>21</td><td>276,869/503,294</td><td>27</td><td>2,221</td><td>9</td><td>1</td><td>45.5s/76.9s</td><td>9</td><td>15,136</td><td>86%</td><td>100%</td><td>0.49</td></tr>
+<tr><td>serena</td><td>python</td><td>15</td><td>61,022/153,717</td><td>15</td><td>1,866</td><td>5</td><td>1</td><td>17.5s/37.0s</td><td>5</td><td>13,170</td><td>77%</td><td>100%</td><td>0.59</td></tr>
+<tr><td>serena</td><td>typescript</td><td>21</td><td>86,540/190,900</td><td>15</td><td>1,277</td><td>5</td><td>1</td><td>20.9s/58.0s</td><td>5</td><td>10,579</td><td>98%</td><td>100%</td><td>0.54</td></tr></table>
+<h2>By arm × resolved model</h2>
+<table><tr><td>arm</td><td>models</td><td>n</td><td>prompt tokens p50/p90</td><td>(uncached in p50)</td><td>out p50</td><td>calls p50</td><td>premium p50</td><td>wall p50/p90</td><td>turns p50</td><td>bytes read p50</td><td>correctness</td><td>edit pass</td><td>tokens CV</td></tr>
+<tr><td>baseline</td><td>gpt-6-luna</td><td>30</td><td>88,288/172,188</td><td>15</td><td>1,275</td><td>5</td><td>1</td><td>21.0s/42.5s</td><td>5</td><td>10,846</td><td>87%</td><td>89%</td><td>0.50</td></tr>
+<tr><td>baseline</td><td>gpt-6-luna,copilot-search-a</td><td>6</td><td>76,870/101,343</td><td>11,785</td><td>2,390</td><td>6</td><td>1</td><td>19.3s/32.3s</td><td>6</td><td>14,833</td><td>83%</td><td>—</td><td>0.27</td></tr>
+<tr><td>graphify</td><td>gpt-6-luna</td><td>36</td><td>203,980/318,737</td><td>21</td><td>2,014</td><td>7</td><td>1</td><td>31.4s/60.4s</td><td>7</td><td>13,796</td><td>85%</td><td>100%</td><td>0.38</td></tr>
+<tr><td>graphify-guard</td><td>gpt-6-luna</td><td>36</td><td>241,516/461,881</td><td>24</td><td>2,209</td><td>8</td><td>1</td><td>38.6s/75.6s</td><td>8</td><td>14,238</td><td>82%</td><td>100%</td><td>0.51</td></tr>
+<tr><td>serena</td><td>gpt-6-luna</td><td>32</td><td>76,446/188,429</td><td>14</td><td>1,263</td><td>4</td><td>1</td><td>20.1s/44.6s</td><td>4</td><td>10,061</td><td>88%</td><td>100%</td><td>0.60</td></tr>
+<tr><td>serena</td><td>gpt-6-luna,copilot-search-a</td><td>4</td><td>84,814/129,970</td><td>15,000</td><td>2,662</td><td>6</td><td>1</td><td>20.6s/33.4s</td><td>6</td><td>22,214</td><td>100%</td><td>100%</td><td>0.37</td></tr></table>
+<h2>KB currency (artifact staleness at query time, commits behind HEAD)</h2>
+<table><tr><td>arm</td><td>p50</td><td>p95</td><td>graph queries p50</td></tr>
+<tr><td>baseline</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>graphify</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>graphify-guard</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>serena</td><td>0</td><td>0</td><td>0</td></tr></table>
+<h2>Per task</h2>
+<table><tr><td>task</td><td>arm</td><td>n</td><td>tokens p50</td><td>calls p50</td><td>wall p50</td><td>correctness</td><td>tokens CV</td></tr>
+<tr><td>svc-001</td><td>baseline</td><td>3</td><td>45,877</td><td>3</td><td>9.1s</td><td>100%</td><td>0.18</td></tr>
+<tr><td>svc-001</td><td>graphify</td><td>3</td><td>101,874</td><td>4</td><td>13.0s</td><td>100%</td><td>0.23</td></tr>
+<tr><td>svc-001</td><td>graphify-guard</td><td>3</td><td>131,635</td><td>5</td><td>17.0s</td><td>100%</td><td>0.26</td></tr>
+<tr><td>svc-001</td><td>serena</td><td>3</td><td>46,085</td><td>3</td><td>10.4s</td><td>100%</td><td>0.19</td></tr>
+<tr><td>svc-003</td><td>baseline</td><td>3</td><td>95,045</td><td>6</td><td>32.5s</td><td>33%</td><td>0.08</td></tr>
+<tr><td>svc-003</td><td>graphify</td><td>3</td><td>275,611</td><td>9</td><td>46.5s</td><td>17%</td><td>0.24</td></tr>
+<tr><td>svc-003</td><td>graphify-guard</td><td>3</td><td>407,615</td><td>12</td><td>65.4s</td><td>33%</td><td>0.09</td></tr>
+<tr><td>svc-003</td><td>serena</td><td>3</td><td>98,380</td><td>5</td><td>29.9s</td><td>33%</td><td>0.25</td></tr>
+<tr><td>svc-004</td><td>baseline</td><td>3</td><td>62,162</td><td>6</td><td>17.6s</td><td>100%</td><td>0.13</td></tr>
+<tr><td>svc-004</td><td>graphify</td><td>3</td><td>205,086</td><td>7</td><td>31.3s</td><td>83%</td><td>0.16</td></tr>
+<tr><td>svc-004</td><td>graphify-guard</td><td>3</td><td>249,519</td><td>8</td><td>39.4s</td><td>83%</td><td>0.24</td></tr>
+<tr><td>svc-004</td><td>serena</td><td>3</td><td>61,022</td><td>5</td><td>17.5s</td><td>100%</td><td>0.30</td></tr>
+<tr><td>svc-006</td><td>baseline</td><td>3</td><td>30,321</td><td>2</td><td>6.7s</td><td>50%</td><td>0.38</td></tr>
+<tr><td>svc-006</td><td>graphify</td><td>3</td><td>130,764</td><td>5</td><td>15.5s</td><td>50%</td><td>0.25</td></tr>
+<tr><td>svc-006</td><td>graphify-guard</td><td>3</td><td>101,062</td><td>4</td><td>11.6s</td><td>67%</td><td>0.15</td></tr>
+<tr><td>svc-006</td><td>serena</td><td>3</td><td>30,462</td><td>2</td><td>5.5s</td><td>50%</td><td>0.00</td></tr>
+<tr><td>svc-008</td><td>baseline</td><td>3</td><td>177,017</td><td>9</td><td>36.9s</td><td>100%</td><td>0.02</td></tr>
+<tr><td>svc-008</td><td>graphify</td><td>3</td><td>282,123</td><td>9</td><td>44.9s</td><td>100%</td><td>0.16</td></tr>
+<tr><td>svc-008</td><td>graphify-guard</td><td>3</td><td>240,496</td><td>8</td><td>37.8s</td><td>100%</td><td>0.16</td></tr>
+<tr><td>svc-008</td><td>serena</td><td>3</td><td>163,444</td><td>8</td><td>37.5s</td><td>100%</td><td>0.08</td></tr>
+<tr><td>web-001</td><td>baseline</td><td>3</td><td>60,649</td><td>4</td><td>11.9s</td><td>100%</td><td>0.12</td></tr>
+<tr><td>web-001</td><td>graphify</td><td>3</td><td>131,629</td><td>5</td><td>17.5s</td><td>100%</td><td>0.10</td></tr>
+<tr><td>web-001</td><td>graphify-guard</td><td>3</td><td>131,339</td><td>5</td><td>15.9s</td><td>100%</td><td>0.18</td></tr>
+<tr><td>web-001</td><td>serena</td><td>3</td><td>53,957</td><td>3</td><td>11.2s</td><td>100%</td><td>0.12</td></tr>
+<tr><td>web-002</td><td>baseline</td><td>3</td><td>62,697</td><td>5</td><td>15.7s</td><td>100%</td><td>0.23</td></tr>
+<tr><td>web-002</td><td>graphify</td><td>3</td><td>135,639</td><td>5</td><td>21.5s</td><td>100%</td><td>0.19</td></tr>
+<tr><td>web-002</td><td>graphify-guard</td><td>3</td><td>163,877</td><td>6</td><td>23.4s</td><td>67%</td><td>0.14</td></tr>
+<tr><td>web-002</td><td>serena</td><td>3</td><td>62,255</td><td>4</td><td>16.0s</td><td>100%</td><td>0.01</td></tr>
+<tr><td>web-003</td><td>baseline</td><td>3</td><td>88,730</td><td>5</td><td>23.5s</td><td>100%</td><td>0.07</td></tr>
+<tr><td>web-003</td><td>graphify</td><td>3</td><td>164,425</td><td>6</td><td>30.2s</td><td>100%</td><td>0.17</td></tr>
+<tr><td>web-003</td><td>graphify-guard</td><td>3</td><td>223,158</td><td>8</td><td>28.2s</td><td>100%</td><td>0.46</td></tr>
+<tr><td>web-003</td><td>serena</td><td>3</td><td>90,028</td><td>5</td><td>20.9s</td><td>100%</td><td>0.19</td></tr>
+<tr><td>web-004</td><td>baseline</td><td>3</td><td>90,665</td><td>7</td><td>24.2s</td><td>100%</td><td>0.11</td></tr>
+<tr><td>web-004</td><td>graphify</td><td>3</td><td>235,652</td><td>8</td><td>42.1s</td><td>100%</td><td>0.23</td></tr>
+<tr><td>web-004</td><td>graphify-guard</td><td>3</td><td>503,294</td><td>13</td><td>92.7s</td><td>83%</td><td>0.39</td></tr>
+<tr><td>web-004</td><td>serena</td><td>3</td><td>86,540</td><td>5</td><td>22.9s</td><td>100%</td><td>0.13</td></tr>
+<tr><td>web-005</td><td>baseline</td><td>3</td><td>86,903</td><td>5</td><td>18.6s</td><td>83%</td><td>0.14</td></tr>
+<tr><td>web-005</td><td>graphify</td><td>3</td><td>180,819</td><td>6</td><td>29.1s</td><td>67%</td><td>0.31</td></tr>
+<tr><td>web-005</td><td>graphify-guard</td><td>3</td><td>452,858</td><td>13</td><td>66.7s</td><td>50%</td><td>0.02</td></tr>
+<tr><td>web-005</td><td>serena</td><td>3</td><td>85,694</td><td>5</td><td>18.6s</td><td>83%</td><td>0.12</td></tr>
+<tr><td>web-009</td><td>baseline</td><td>3</td><td>160,040</td><td>8</td><td>30.7s</td><td>67%</td><td>0.08</td></tr>
+<tr><td>web-009</td><td>graphify</td><td>3</td><td>279,125</td><td>9</td><td>37.2s</td><td>100%</td><td>0.12</td></tr>
+<tr><td>web-009</td><td>graphify-guard</td><td>3</td><td>282,080</td><td>9</td><td>45.5s</td><td>100%</td><td>0.02</td></tr>
+<tr><td>web-009</td><td>serena</td><td>3</td><td>173,671</td><td>8</td><td>44.0s</td><td>100%</td><td>0.09</td></tr>
+<tr><td>web-010</td><td>baseline</td><td>3</td><td>148,095</td><td>8</td><td>49.5s</td><td>100%</td><td>0.05</td></tr>
+<tr><td>web-010</td><td>graphify</td><td>3</td><td>268,022</td><td>9</td><td>60.9s</td><td>100%</td><td>0.12</td></tr>
+<tr><td>web-010</td><td>graphify-guard</td><td>3</td><td>276,869</td><td>9</td><td>65.0s</td><td>100%</td><td>0.07</td></tr>
+<tr><td>web-010</td><td>serena</td><td>3</td><td>190,900</td><td>8</td><td>69.0s</td><td>100%</td><td>0.11</td></tr></table>
+<p>Models seen: copilot-search-a, gpt-6-luna · Copilot versions: 1.0.105</p>
+<p>---</p>
+<p>**Metric confidence.** `prompt tokens` = input + cache_read + cache_write per session (Copilot&#x27;s `input.tokenCount` alone is only the uncached slice — 15–40 tokens in practice — so it is shown separately). Tokens, model calls, turns, tool calls and API time come from Copilot CLI `events.jsonl` (`session.shutdown`, `session.usage_record`) — primary. `premium_requests` is the billing number from the same event, cross-checked against the stdout `result` event; it counts prompts × model multiplier, not model calls (github/copilot-cli#1582 documents the interactive `/usage` undercount; we do not use `/usage`). `bytes_read` is a proxy: result length of view/grep/glob/bash tool calls. Model is `auto` unless pinned; tables list every resolved model and Copilot version seen — compare within a model only. No single-run number appears anywhere: every cell is a median (p50) or p90 over ≥ 3 runs.</p></table>

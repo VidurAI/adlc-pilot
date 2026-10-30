@@ -181,3 +181,10 @@ everything here is reversible by the pilot owner.
 - **Edit tasks carry overlay tests** (fail on the pristine repo, pass after the reference
   fix; verified per task in scratch clones). Without them every edit task's test command
   already exited 0 before any change, so tests could not distinguish a fix from inaction.
+- **Tier 1 verdict recorded in DECISION_ADR.md.** The headline is tool adoption, not
+  tool quality: Serena MCP used in 1/36 runs; graphify skill auto-invoked 36/36 and
+  queried 19–22/36. Thresholds were set from baseline (tokens ≤ 0.8×, correctness ≥
+  −5 pts, wall ≤ 1.2×); no arm qualified. The contract + kit are adopted regardless —
+  they are the vendor-neutral part and cost nothing per task.
+- **Model stratification worked as designed:** 10 of 144 runs also used a
+  `copilot-search-a` helper model under `auto`; the scorecard lists them separately.
