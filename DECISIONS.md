@@ -73,3 +73,70 @@ everything here is reversible by the pilot owner.
 - **Serena memories live in `<repo>/.serena/memories/` and are committed**; the
   allowlist deliberately excludes `write_memory`/`edit_memory`/`delete_memory` so agents
   cannot mutate the contract surface at run time. Memory updates go through PRs.
+- **Copilot CLI self-updates.** Mid-session `copilot --version` moved 1.0.73 → 1.0.105
+  without any action from us (Homebrew cask binary is 1.0.60; the CLI downloads updates
+  into its own store). `--no-auto-update` would fall back to the *bundled* 1.0.60, which
+  predates the behaviours we verified (`.github/skills`, `--trust-folder`). Decision: on
+  the dev machine the harness runs whatever is current, records
+  `session.start.copilotVersion` per run, and the scorecard lists every version seen;
+  a mixed-version tier is flagged. The devcontainer installs `@github/copilot@1.0.105`
+  via npm and runs with `--no-auto-update`, where bundled == pinned. Pin bumped to 1.0.105.
+- **LLM API keys in the developer's shell** (an `OPENAI_API_KEY` was present here) would
+  make headless `graphify extract` pick a backend. `adlc baseline` and the harness strip
+  `*_API_KEY` from the child environment and force `GRAPHIFY_BACKEND=none`; `adlc doctor`
+  warns when such keys are set. Non-negotiable 2 is enforced in code, not by asking.
+- **`adlc doctor` before `adlc baseline`**: a missing artifact is a WARN (not built yet),
+  a stamped-but-stale one beyond threshold is a FAIL. Otherwise the documented order
+  (init → fill prose → doctor → baseline) could never be green at step 3.
+- **AGENTS.md skeleton uses bare TODO words**, not backticked fake paths — the lint's
+  referenced-path drift check correctly flagged the template's own placeholder.
+- **Copilot CLI hooks exist and work from the repo**: `.github/hooks/<name>.json` with
+  `{"version":1,"hooks":{"preToolUse":[{"type":"command","bash":"…"}]}}`; the command
+  receives `{sessionId,cwd,toolName,toolArgs}` on stdin (verified with a probe hook on
+  `view`). The `graphify-guard` arm is therefore buildable on Copilot: a kit adapter
+  (`adlc guard-hook`) maps Copilot's `view|grep|glob` to `graphify hook-guard read|grep|find`
+  and emits Copilot's decision JSON. `graphify copilot install` itself ships no hook.
+- **Skill on/off per arm** is `$COPILOT_HOME/settings.json` → `{"disabledSkills":["graphify"]}`
+  (what `copilot skill disable` writes). Serena on/off is `--disable-mcp-server serena`.
+  Arms differ only by what is disabled on top of the same committed repo state.
+- **Reusable workflows live in `adlc-kit/.github/workflows/`** (the only path GitHub
+  resolves for `workflow_call`); `adlc-kit/workflows/README.md` indexes them. The spec's
+  `workflows/` directory is kept as that index rather than duplicating YAML.
+- **Serena memories are derived, not authored**: `adlc baseline` regenerates
+  `.serena/memories/adlc_contract.md` (from AGENTS.md sections) and
+  `adlc_graph_summary.md` (from GRAPH_REPORT god nodes). One source of truth, same
+  freshness stamp, no agent-run onboarding that would need `write_memory`.
+- **Language-server pins corrected to versions that exist**: basedpyright 1.40.2,
+  typescript-language-server 6.0.2 (+ typescript 5.9.3, not 7.x), jdtls 1.50.0 build
+  202509041425, csharp-ls 0.28.0. My first guesses (1.29.5 / 4.3.4 / 1.43.0 / 0.18.0)
+  failed to install — pins are now only written after a successful install.
+- **csharp-ls over OmniSharp**: csharp-ls is a `dotnet tool` (one-line pin, no Mono, no
+  bundled VS components); Serena has a first-class `csharp` server id for it.
+- **Language servers are pinned by Serena, not by the kit.** Serena's solidlsp downloads
+  exact versions (pyright 1.1.403, typescript-language-server 5.1.3 + typescript 5.9.3,
+  a sha256-pinned jdtls VSIX, roslyn-language-server 5.5.0-2.26078.4). Installing
+  separate binaries (`basedpyright`, `csharp-ls`) would be a second, unused copy;
+  `csharp-ls` 0.23–0.28 also fails `dotnet tool install` on .NET 8 (package lacks
+  DotnetToolSettings.xml). The devcontainer pre-warms with `serena
+  download-ls-dependencies python typescript java csharp`; the Serena commit is the pin.
+- **Premium requests ≠ model calls, and the harness reports both.** The kestrel-ops docs
+  pass (one `-p` prompt) made 35 model calls (`session.usage_record`, cost 1.0 each) but
+  `totalPremiumRequests` = 1 — Copilot bills per prompt × multiplier. `premium_requests`
+  is the billing number; `model_calls` and `premium_cost_sum` (Σ cost) measure the work
+  behind it. The scorecard shows all three; "fewer premium requests" is judged on billing,
+  "fewer model calls" is reported alongside as the honest efficiency signal.
+- **Headless `adlc baseline` must not overwrite a skill-built docs graph.** Tested on a
+  copy of kestrel-ops after the `/graphify` pass: a full `graphify extract` (backend none)
+  kept concept/rationale nodes but dropped 24 of 53 document nodes; `graphify update`
+  ballooned document nodes 53 → 301 (duplicates). Decision: `adlc baseline --stamp-only`
+  re-stamps an existing graph; on a docs-only repo `adlc baseline` defaults to stamp-only
+  and prints that the docs semantic pass is refreshed only via `/graphify` in a Copilot
+  session. Code repos keep full code-only extraction.
+- **Docs semantic pass cost (kestrel-ops, 43 files):** 7 min 27 s wall, 35 model calls,
+  1 premium request (billing), 2.96M input tokens (2.84M cache reads), 43k output tokens,
+  model `gpt-6-luna` (auto). Output: 150 nodes (53 document, 24 concept, 16 rationale,
+  57 code/structure), 168 edges. Recorded in `results/docs-pass.json`.
+- **Roslyn language server needs the .NET 10 runtime** (Serena's `csharp` download failed
+  on a .NET-8-only machine). Devcontainer installs the .NET 10 runtime next to the .NET 8
+  SDK. `pyright` is fetched lazily by Serena at first use (0 B pre-download) — acceptable;
+  the first Serena start on a Python repo pays ~0.5 min once per image.

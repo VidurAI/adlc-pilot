@@ -1,0 +1,20 @@
+# L1 project definition for `adlc federate`. Keep it short: members, hints, teams.
+adlc_project:
+  schema: 1
+  name: kestrel
+  members:
+    - repo: kestrel-services
+      path: ../../repos/kestrel-services      # or: url: https://github.com/<org>/kestrel-services, ref: main
+    - repo: kestrel-web
+      path: ../../repos/kestrel-web
+    - repo: kestrel-ops
+      path: ../../repos/kestrel-ops
+  contract_hints:
+    openapi: []                                # paths to OpenAPI files, if any member publishes one
+    packages: []                               # extra published package names not derivable from manifests
+  teams:                                       # team -> project membership (CODEOWNERS gives team -> repo)
+    "@kestrel/booking-team": kestrel
+    "@kestrel/pricing-team": kestrel
+    "@kestrel/platform-team": kestrel
+    "@kestrel/web-team": kestrel
+    "@kestrel/architecture-guild": kestrel

@@ -10,12 +10,12 @@ export GRAPHIFY_BACKEND=none
 .PHONY: all org kit init doctor baseline federate tasks tier1 tier2 tier3 scorecard monitor adoption clean-runs
 
 kit:               ## install the kit into its own venv (editable) and lock
-	cd $(KIT) && uv venv -q -p 3.12 .venv && uv pip install -q -p .venv/bin/python -e ".[dev]" && uv lock -q && .venv/bin/adlc pins && .venv/bin/pytest -q
+	cd $(KIT) && uv venv -q --clear -p 3.12 .venv && uv pip install -q -p .venv/bin/python -e ".[dev]" && uv lock -q && .venv/bin/adlc pins && .venv/bin/pytest -q
 
 org:               ## Phase 1 acceptance: build all Kestrel repos from scratch, all suites green
 	$(ENV) cd repos/kestrel-services/booking && mvn -q test
 	$(ENV) cd repos/kestrel-services/pricing && dotnet test --nologo -v q
-	cd repos/kestrel-services/gateway && uv venv -q -p 3.12 .venv && uv pip install -q -p .venv/bin/python -e ".[dev]" && .venv/bin/pytest -q
+	cd repos/kestrel-services/gateway && uv venv -q --clear -p 3.12 .venv && uv pip install -q -p .venv/bin/python -e ".[dev]" && .venv/bin/pytest -q
 	cd repos/kestrel-web && npm ci --silent && npm test --silent
 	@for r in $(REPOS); do echo "$$r: $$(git -C repos/$$r rev-list --count HEAD) commits"; done
 

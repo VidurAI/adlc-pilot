@@ -1,0 +1,23 @@
+{
+  "repo": "kestrel-ops",
+  "started": "2026-10-30T13:08:00Z",
+  "ended": "2026-10-30T13:15:27Z",
+  "wall_seconds": 447,
+  "model_calls": 35,
+  "premium_requests_billing": 1,
+  "premium_cost_sum": 35,
+  "input_tokens": 2956452,
+  "cache_read_tokens": 2844938,
+  "output_tokens": 43420,
+  "model": "gpt-6-luna",
+  "nodes": 150,
+  "edges": 168,
+  "node_types": {
+    "document": 53,
+    "concept": 24,
+    "rationale": 16,
+    "code": 57
+  },
+  "raw": "results/raw/docs-pass-kestrel-ops.events.jsonl",
+  "note": "single -p prompt invoking the /graphify skill; metrics from events.jsonl session.usage_record + session.shutdown"
+}
