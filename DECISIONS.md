@@ -146,3 +146,11 @@ everything here is reversible by the pilot owner.
   it run and injects the text. `adlc guard-hook` adapts graphify's `hook-guard read|search`
   (Claude-Code-shaped `tool_input`) to this; strict denies only `read` (graphify never
   blocks searches), non-strict nudges. Fails open if graphify is missing.
+- **No Docker on the pilot machine.** Consequences, stated plainly: the devcontainer image
+  is authored and reviewed but never built here; `act` cannot run, so the reusable
+  workflows are verified by a stub runner (`tests/test_workflows.py`) that executes their
+  `adlc …` steps against fixture repos and asserts the exit codes. Image build and a real
+  `act` run are the first two items on the "could not complete" list.
+- **Kit tagged `v0.1.0`** after the harness dry-run suite passed. Phase 8 retags on each
+  adoption-test fix (`v0.1.1`, …). The `uv tool install git+<url>@v0.1.0` in ADOPT.md
+  refers to the intended GitHub location; the pilot installs from the local path.
