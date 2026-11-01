@@ -1,6 +1,6 @@
-# Org graph  (2026-11-01T15:00:29+00:00)
+# Org graph  (2026-11-01T15:08:46+00:00)
 
-- 32 nodes · 56 edges · projects: kestrel @ 2026-11-01T15:00:28+00:00
+- 32 nodes · 56 edges · projects: kestrel @ 2026-11-01T15:08:45+00:00
 
 ## Team ↔ project ↔ service dependency table
 | team | owns (repo / dir) | project | contracts its repos consume |

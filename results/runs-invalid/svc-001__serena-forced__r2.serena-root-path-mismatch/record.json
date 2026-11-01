@@ -1,0 +1,62 @@
+{
+  "run_id": "svc-001__serena-forced__r2",
+  "task": "svc-001",
+  "repo": "kestrel-services",
+  "category": "literal",
+  "languages": [
+    "python"
+  ],
+  "tier": 1,
+  "arm": "serena-forced",
+  "run": 2,
+  "started_at": "2026-11-01T15:05:57+00:00",
+  "exit_code": 0,
+  "wall_ms": 29396,
+  "api_duration_ms": 24851,
+  "prompt_tokens": 121070,
+  "input_tokens": 2761,
+  "output_tokens": 1415,
+  "cache_read_tokens": 107523,
+  "cache_write_tokens": 10786,
+  "reasoning_tokens": 1121,
+  "premium_requests": 1,
+  "premium_requests_stdout": 1,
+  "premium_reason": null,
+  "model_calls": 6,
+  "premium_cost_sum": 6.0,
+  "nano_aiu": 340708000,
+  "models": [
+    "gpt-6-luna"
+  ],
+  "copilot_version": "1.0.105",
+  "turns": 6,
+  "tool_calls": {
+    "serena-list_memories": 1,
+    "glob": 1,
+    "serena-read_memory": 1,
+    "serena-get_symbols_overview": 2,
+    "bash": 1,
+    "view": 1
+  },
+  "mcp_tool_calls": {
+    "serena-list_memories": 1,
+    "serena-read_memory": 1,
+    "serena-get_symbols_overview": 2
+  },
+  "bytes_read": 5516,
+  "skills_invoked": [],
+  "graph_queries": 0,
+  "session_error": null,
+  "valid": true,
+  "freshness_exit": 0,
+  "freshness_behind": 0,
+  "answer": "It\u2019s defined in `gateway/errors.py` in `BookingUnavailable`. The message and machine code are set there; it inherits HTTP **503 Service Unavailable** from `UpstreamUnavailable`. The code is **`booking_unavailable`**.",
+  "judge_score": 2,
+  "diff_hash": "c0a6bdff97172c30",
+  "diff_lines": 87,
+  "raw": "runs/svc-001__serena-forced__r2",
+  "judge_reason": "Identifies BookingUnavailable in errors.py and gives the inherited 503 status and booking_unavailable code.",
+  "judge_premium_requests": 1,
+  "judge_raw": "{\"score\":2,\"reason\":\"Identifies BookingUnavailable in errors.py and gives the inherited 503 status and booking_unavailable code.\"}",
+  "dry_run": false
+}
