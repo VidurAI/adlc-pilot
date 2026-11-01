@@ -3,7 +3,7 @@
 5 of 27 judged answers. Fill `human:` with 0/1/2.
 `adlc scorecard --spotcheck results/spotcheck.md` computes agreement.
 
-## svc-001  (ref: svc-001__graphify-lean__r2)
+## svc-001  (ref: svc-001__serena-forced__r2)
 
 **Question**
 
@@ -28,14 +28,14 @@ plus unavailable_error for transport failures and an open circuit breaker).
 **Answer**
 
 ```
-It’s defined in `gateway/errors.py:90–92` as `BookingUnavailable`. It inherits HTTP **503 Service Unavailable** from `UpstreamUnavailable` (`gateway/errors.py:85`) and uses machine code **`booking_unavailable`**.
+It’s defined in `gateway/errors.py` in `BookingUnavailable` (lines 89–91). The response is **HTTP 503** with machine code **`booking_unavailable`**.
 ```
 
 judge: 2  ·  human: ___
 
 ---
 
-## svc-003  (ref: svc-003__graphify-lean__r2)
+## svc-003  (ref: svc-003__serena-forced__r2)
 
 **Question**
 
@@ -62,18 +62,16 @@ nothing selects it by name from configuration.
 **Answer**
 
 ```
-**No in-repo code or tests depend on the legacy formula.** A repository-wide search found no imports or references to it; the fresh graph also didn’t include a node for the package, so that conclusion comes from the source search. The gateway’s quote route goes through `QuoteService` to `PricingClient`, which posts to the pricing service’s `/v1/quote` endpoint (`gateway/gateway/routes/quote.py:16–20`, `gateway/gateway/services.py:48–62`, `gateway/gateway/clients/pricing.py:14–25`).
+**No in-repo code appears to depend on `gateway.legacy`.** The legacy `quote` function has no callers outside its own module, and `legacy/__init__.py` contains only a docstring.
 
-Deleting `gateway/gateway/legacy/` therefore shouldn’t break the gateway’s current routes or runtime. It would remove the old module’s direct-import API—`quote`, `chargeable_weight`, and its formula constants (`gateway/gateway/legacy/pricing_v1.py:11–31,47–72`)—so external scripts or consumers importing it could break. The package is included by the setuptools `gateway*` discovery rule (`gateway/pyproject.toml:25–26`).
-
-One caveat: `gateway/AGENTS.md:13` says not to touch `gateway/legacy/`; follow the separate removal ticket/process noted there before deleting it.
+The active quote path goes through `gateway/routes/quote.py` → `QuoteService` → `PricingClient`, which sends requests to the pricing service’s `/v1/quote` endpoint. The quote-route tests also exercise that upstream path, not the local formula. Deleting `legacy/` therefore shouldn’t break the gateway’s current quote flow or its tests. The main risk is any out-of-repository script or consumer importing `gateway.legacy.pricing_v1` directly.
 ```
 
 judge: 1  ·  human: ___
 
 ---
 
-## svc-006  (ref: svc-006__graphify-lean__r2)
+## svc-006  (ref: svc-006__serena-forced__r2)
 
 **Question**
 
@@ -95,14 +93,14 @@ passes it to the httpx clients for booking and pricing (connect timeout capped a
 **Answer**
 
 ```
-The default timeout is **5 seconds** for calls to both booking and pricing. Set **`GATEWAY_TIMEOUT_SECONDS`** to override it (`gateway/config.py:26,54`); both clients use that setting (`gateway/main.py:51–54`).
+The default timeout is **5 seconds** per upstream call. Set `GATEWAY_TIMEOUT_SECONDS` to override it.
 ```
 
-judge: 2  ·  human: ___
+judge: 1  ·  human: ___
 
 ---
 
-## web-001  (ref: web-001__graphify-lean__r1)
+## web-001  (ref: web-001__serena-forced__r1)
 
 **Question**
 
@@ -125,16 +123,16 @@ and documented with default false in .env.example.
 **Answer**
 
 ```
-The flag is **`VITE_FEATURE_MULTI_CARRIER_QUOTES`**. It’s read in `src/lib/flags.ts` by `isMultiCarrierQuotesEnabled()`, which defaults to `import.meta.env`.
+Set `VITE_FEATURE_MULTI_CARRIER_QUOTES` to enable quote comparisons across carriers. It’s read in `src/lib/flags.ts` by `isMultiCarrierQuotesEnabled()`, which parses the value with `parseFlag()`.
 
-Values count as “on” after trimming whitespace and ignoring case: **`1`**, **`true`**, **`on`**, **`yes`**, and **`enabled`**. Missing values and other strings are off.
+After trimming whitespace and ignoring case, `1`, `true`, `on`, `yes`, and `enabled` count as on. Missing values and anything else count as off.
 ```
 
 judge: 2  ·  human: ___
 
 ---
 
-## web-003  (ref: web-003__graphify-lean__r3)
+## web-003  (ref: web-003__serena-forced__r3)
 
 **Question**
 
@@ -160,9 +158,9 @@ are not used outside tests. So every price shown on the quote page is rounded by
 **Answer**
 
 ```
-The affected UI is the **quote results on the Quote page**. `MoneyText` calls `formatMoney`, which calls `roundMoney`; QuotePage uses it for each carrier’s quote total, and `QuoteBreakdown` uses it for every line item and the breakdown total (`src/pages/QuotePage.tsx:43`, `src/components/QuoteBreakdown.tsx:21,30`; rounding path: `src/components/MoneyText.tsx:11`, `src/lib/money.ts:10`).
+The affected UI is the **quote results on `QuotePage`**. Each carrier’s quote card shows a rounded total, and its breakdown table shows rounded amounts for each line item and the table total. These all pass through `MoneyText → formatMoney → roundMoney` (`src/pages/QuotePage.tsx`, `src/components/QuoteBreakdown.tsx`, `src/components/MoneyText.tsx`).
 
-I found no UI calls to `sumMoney` or `parseMoneyInput`, the other helpers that call `roundMoney`. Shipment and booking screens don’t display values through this path.
+`sumMoney` and `parseMoneyInput` also call `roundMoney`, but neither has an app caller, so they don’t currently feed displayed values.
 ```
 
 judge: 2  ·  human: ___

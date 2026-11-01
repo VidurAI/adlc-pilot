@@ -173,6 +173,44 @@ Graphify arms fail tokens and wall in every category; graphify-lean is the close
    n=12), at 3.8× baseline tokens; on an org this small the same questions were mostly
    answerable from CODEOWNERS + grep. Its value is a bet on org size, not a Kestrel result.
 
+## Serena, re-measured (2026-11-01)
+Three defects stood between the pilot and a real Serena number: `.mcp.json` not loaded
+from service subdirectories, Roslyn needing the .NET 10 runtime, and `--project ..` making
+every agent-supplied path wrong. All three are fixed in the kit (each service is now its
+own Serena project); 10 forced runs recorded against a broken Serena are quarantined, not
+counted. Then two arms ran on Tier 1 with Serena verified live in all three services:
+
+| arm | n | prompt tokens p50 / p90 | calls p50 | wall p50 / p90 | correctness | edit pass | Serena calls p50 | runs using Serena |
+|---|---|---|---|---|---|---|---|---|
+| baseline | 36 | 88k / 172k | 5 | 19.4s / 42.4s | 86% | 89% | 0 | 0/36 |
+| serena-forced ‡ | 36 | 141k / 284k | 6 | 41.2s / 57.5s | 82% | 89% | 8 | 33/36 |
+| graphify-lean | 36 | 142k / 230k | 8 | 33.4s / 50.5s | 90% | 100% | 0 | 0/36 |
+
+‡ Text search denied (`rg`, `grep_search`, code-search subagent, grep-family shell
+commands via a preToolUse hook) and an imperative routing section; Serena is the only
+search in the room. `glob` and `view` stay allowed.
+
+By category (correctness; tokens p50), baseline / serena-forced: literal 83 %; 47k /
+83 %; 104k · locate 100 %; 63k / 100 %; 99k · trace 83 %; 89k / 73 %; 141k · edit 89 %;
+163k / 89 %; 217k. By repo: services 77 % → 73 %, web 93 % → 88 %.
+
+**Reading.** When the agent is made to use Serena it does: 8 symbol calls per run, 33 of
+36 runs. The result is 1.6× baseline tokens, 2.1× wall-clock, and 4 points less correct.
+Per task it never beat baseline; it lost on svc-004 (trace) and web-010 (edit) and tied
+elsewhere. Wall-clock is the worst axis because each language server answers in 0.5–3 s
+and a run makes 8–25 such calls. The one place Serena matched a graph arm was svc-003
+(1/1/1 vs baseline 1/0/1). Serena's path-rooted API is a real cost: when the agent is
+unsure of the project root it probes two or three path forms before one lands.
+
+**Verdict, re-issued.** Serena on Copilot CLI 1.0.105 / gpt-6-luna is now *measured*, not
+unproven: the agent does not reach for it voluntarily (1/21 on web, where it was always
+available), and when forced to it is slower and no more correct than grep on this org's
+code. It is not recommended as a default context layer. It remains the right tool for the
+one job grep cannot do, type-aware symbol edits across files, and the kit keeps the
+pin and the per-service configuration for teams that want it. The plain serena arm on
+services and Tier 2 (Java/C#, where grep is weakest) is being re-measured with Serena
+present; rows appear here when they land.
+
 ## Operating cost per tool (measured where marked)
 | Item | Cost | Measured? |
 |---|---|---|

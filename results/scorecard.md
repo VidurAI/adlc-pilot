@@ -1,9 +1,17 @@
 # ADLC scorecard
 
-342 valid runs · tasks 29 · arms ['baseline', 'graphify', 'graphify-federated', 'graphify-guard', 'graphify-lean', 'serena']
+358 valid runs · tasks 29 · arms ['baseline', 'graphify', 'graphify-federated', 'graphify-guard', 'graphify-lean', 'serena', 'serena-forced']
 
-**Excluded: 9 invalid run(s)** (Copilot did not finish cleanly; never pooled):
+**Excluded: 33 invalid run(s)** (Copilot did not finish cleanly; never pooled):
 
+- svc-001 — serena MCP not loaded: task cwd is a service subdir and Copilot CLI reads .mcp.json from c — arms ['serena']
+- svc-002 — serena MCP not loaded: task cwd is a service subdir and Copilot CLI reads .mcp.json from c — arms ['serena']
+- svc-003 — serena MCP not loaded: task cwd is a service subdir and Copilot CLI reads .mcp.json from c — arms ['serena']
+- svc-004 — serena MCP not loaded: task cwd is a service subdir and Copilot CLI reads .mcp.json from c — arms ['serena']
+- svc-006 — serena MCP not loaded: task cwd is a service subdir and Copilot CLI reads .mcp.json from c — arms ['serena']
+- svc-008 — serena MCP not loaded: task cwd is a service subdir and Copilot CLI reads .mcp.json from c — arms ['serena']
+- svc-009 — serena MCP not loaded: task cwd is a service subdir and Copilot CLI reads .mcp.json from c — arms ['serena']
+- svc-010 — serena MCP not loaded: task cwd is a service subdir and Copilot CLI reads .mcp.json from c — arms ['serena']
 - web-008 — exit 1 — arms ['baseline', 'graphify', 'graphify-federated']
 
 ## By arm
@@ -15,7 +23,8 @@
 | graphify-federated | 42 | 230,310/538,475 | 24 | 2,564 | 7 | 1 | 40.8s/81.1s | 7 | 31,320 | 85% | — | 0.80 |
 | graphify-guard | 45 | 242,535/453,978 | 24 | 2,272 | 8 | 1 | 37.8s/74.4s | 8 | 13,960 | 83% | 93% | 0.48 |
 | graphify-lean | 36 | 140,324/223,982 | 24 | 2,034 | 8 | 1 | 33.3s/49.5s | 8 | 16,777 | 90% | 100% | 0.34 |
-| serena | 45 | 90,028/172,588 | 15 | 1,583 | 5 | 1 | 22.9s/43.8s | 5 | 12,549 | 86% | 87% | 0.51 |
+| serena | 25 | 78,830/190,568 | 15 | 1,138 | 5 | 1 | 19.0s/52.7s | 5 | 9,716 | 98% | 100% | 0.58 |
+| serena-forced | 36 | 139,305/265,712 | 3,810 | 1,902 | 6 | 1 | 40.3s/55.6s | 6 | 8,424 | 82% | 89% | 0.45 |
 
 ## By arm × category
 
@@ -48,10 +57,14 @@
 | graphify-lean | literal | 9 | 101,435/124,262 | 18 | 625 | 6 | 1 | 15.2s/18.4s | 6 | 8,204 | 94% | — | 0.17 |
 | graphify-lean | locate | 3 | 101,944/102,100 | 18 | 798 | 6 | 1 | 16.3s/17.9s | 6 | 11,053 | 100% | — | 0.01 |
 | graphify-lean | trace | 15 | 144,151/230,616 | 24 | 2,626 | 8 | 1 | 34.2s/48.0s | 8 | 24,626 | 80% | — | 0.29 |
-| serena | edit | 15 | 163,444/200,674 | 27 | 2,187 | 8 | 1 | 39.1s/64.6s | 8 | 13,141 | 87% | 87% | 0.20 |
-| serena | literal | 9 | 45,332/55,343 | 9 | 246 | 3 | 1 | 10.4s/11.5s | 3 | 474 | 83% | — | 0.26 |
-| serena | locate | 6 | 76,180/97,702 | 14 | 1,080 | 4 | 1 | 19.2s/24.6s | 4 | 8,436 | 92% | — | 0.21 |
-| serena | trace | 15 | 86,540/106,090 | 15 | 1,583 | 5 | 1 | 22.0s/27.9s | 5 | 14,652 | 83% | — | 0.23 |
+| serena | edit | 6 | 190,484/223,350 | 3,834 | 2,942 | 8 | 1 | 51.3s/74.2s | 8 | 12,435 | 100% | 100% | 0.12 |
+| serena | literal | 7 | 46,682/68,065 | 9 | 370 | 3 | 1 | 11.2s/13.3s | 3 | 1,766 | 100% | — | 0.21 |
+| serena | locate | 3 | 62,255/62,770 | 12 | 604 | 4 | 1 | 16.0s/18.4s | 4 | 4,324 | 100% | — | 0.01 |
+| serena | trace | 9 | 86,540/93,054 | 15 | 1,277 | 5 | 1 | 20.9s/23.3s | 5 | 13,734 | 94% | — | 0.15 |
+| serena-forced | edit | 9 | 216,950/289,966 | 3,794 | 3,102 | 10 | 1 | 53.8s/68.2s | 10 | 10,739 | 89% | 89% | 0.22 |
+| serena-forced | literal | 9 | 103,612/136,179 | 3,549 | 961 | 5 | 1 | 21.4s/28.7s | 5 | 2,711 | 83% | — | 0.19 |
+| serena-forced | locate | 3 | 99,282/133,589 | 4,976 | 1,255 | 4 | 1 | 23.7s/39.9s | 4 | 3,079 | 100% | — | 0.29 |
+| serena-forced | trace | 15 | 140,575/164,494 | 3,949 | 2,213 | 6 | 1 | 41.2s/46.8s | 6 | 8,489 | 73% | — | 0.47 |
 
 ## By arm × language
 
@@ -83,10 +96,10 @@
 | graphify-guard | typescript | 21 | 276,869/503,294 | 27 | 2,221 | 9 | 1 | 45.5s/76.9s | 9 | 15,136 | 86% | 100% | 0.49 |
 | graphify-lean | python | 15 | 157,838/237,071 | 24 | 2,626 | 8 | 1 | 36.7s/48.0s | 8 | 17,757 | 83% | 100% | 0.35 |
 | graphify-lean | typescript | 21 | 136,144/195,959 | 21 | 1,936 | 7 | 1 | 33.2s/50.5s | 7 | 16,289 | 95% | 100% | 0.29 |
-| serena | csharp | 3 | 128,932/141,364 | 21 | 2,150 | 7 | 1 | 29.8s/32.2s | 7 | 13,069 | 100% | 100% | 0.12 |
-| serena | java | 6 | 113,237/155,271 | 26 | 1,648 | 7 | 1 | 29.6s/41.3s | 7 | 12,916 | 58% | 33% | 0.23 |
-| serena | python | 15 | 61,022/153,717 | 15 | 1,866 | 5 | 1 | 17.5s/37.0s | 5 | 13,170 | 77% | 100% | 0.59 |
+| serena | python | 4 | 46,484/69,186 | 9 | 304 | 3 | 1 | 11.1s/13.9s | 3 | 1,800 | 100% | — | 0.26 |
 | serena | typescript | 21 | 86,540/190,900 | 15 | 1,277 | 5 | 1 | 20.9s/58.0s | 5 | 10,579 | 98% | 100% | 0.54 |
+| serena-forced | python | 15 | 134,406/287,617 | 3,703 | 2,213 | 6 | 1 | 36.5s/53.4s | 6 | 11,024 | 73% | 100% | 0.55 |
+| serena-forced | typescript | 21 | 142,166/186,641 | 3,813 | 1,897 | 6 | 1 | 41.2s/66.8s | 6 | 7,518 | 88% | 83% | 0.32 |
 
 ## By arm × resolved model
 
@@ -101,8 +114,8 @@
 | graphify-federated | mai-code-1.1-flash | 2 | 28,798/29,146 | 5,502 | 224 | 2 | 1 | 11.1s/11.7s | 2 | 2,422 | 75% | — | 0.02 |
 | graphify-guard | gpt-6-luna | 45 | 242,535/453,978 | 24 | 2,272 | 8 | 1 | 37.8s/74.4s | 8 | 13,960 | 83% | 93% | 0.48 |
 | graphify-lean | gpt-6-luna | 36 | 140,324/223,982 | 24 | 2,034 | 8 | 1 | 33.3s/49.5s | 8 | 16,777 | 90% | 100% | 0.34 |
-| serena | gpt-6-luna | 39 | 89,461/176,951 | 15 | 1,277 | 5 | 1 | 22.9s/44.1s | 5 | 10,698 | 85% | 86% | 0.53 |
-| serena | gpt-6-luna,copilot-search-a | 6 | 97,702/123,866 | 14,625 | 2,778 | 7 | 1 | 23.2s/32.0s | 7 | 27,845 | 92% | 100% | 0.30 |
+| serena | gpt-6-luna | 25 | 78,830/190,568 | 15 | 1,138 | 5 | 1 | 19.0s/52.7s | 5 | 9,716 | 98% | 100% | 0.58 |
+| serena-forced | gpt-6-luna | 36 | 139,305/265,712 | 3,810 | 1,902 | 6 | 1 | 40.3s/55.6s | 6 | 8,424 | 82% | 89% | 0.45 |
 
 ## KB currency (artifact staleness at query time, commits behind HEAD)
 
@@ -114,6 +127,7 @@
 | graphify-guard | 0 | 0 | 1 |
 | graphify-lean | 0 | 0 | 1 |
 | serena | 0 | 0 | 0 |
+| serena-forced | 0 | 0 | 0 |
 
 ## Per task
 
@@ -153,21 +167,21 @@
 | svc-001 | graphify | 3 | 101,874 | 4 | 13.0s | 100% | 0.23 |
 | svc-001 | graphify-guard | 3 | 131,635 | 5 | 17.0s | 100% | 0.26 |
 | svc-001 | graphify-lean | 3 | 104,357 | 6 | 15.3s | 100% | 0.09 |
-| svc-001 | serena | 3 | 46,085 | 3 | 10.4s | 100% | 0.19 |
+| svc-001 | serena | 4 | 46,484 | 3 | 11.1s | 100% | 0.26 |
+| svc-001 | serena-forced | 3 | 103,612 | 5 | 21.4s | 100% | 0.05 |
 | svc-002 | baseline | 3 | 99,654 | 5 | 18.5s | 100% | 0.28 |
 | svc-002 | graphify | 3 | 256,304 | 8 | 32.2s | 100% | 0.26 |
 | svc-002 | graphify-guard | 3 | 268,243 | 9 | 34.5s | 100% | 0.21 |
-| svc-002 | serena | 3 | 95,782 | 7 | 22.6s | 83% | 0.04 |
 | svc-003 | baseline | 3 | 95,045 | 6 | 32.5s | 33% | 0.08 |
 | svc-003 | graphify | 3 | 275,611 | 9 | 46.5s | 17% | 0.24 |
 | svc-003 | graphify-guard | 3 | 407,615 | 12 | 65.4s | 33% | 0.09 |
 | svc-003 | graphify-lean | 3 | 241,883 | 12 | 48.5s | 50% | 0.16 |
-| svc-003 | serena | 3 | 98,380 | 5 | 29.9s | 33% | 0.25 |
+| svc-003 | serena-forced | 3 | 153,125 | 6 | 41.9s | 50% | 0.16 |
 | svc-004 | baseline | 3 | 62,162 | 6 | 17.6s | 100% | 0.13 |
 | svc-004 | graphify | 3 | 205,086 | 7 | 31.3s | 83% | 0.16 |
 | svc-004 | graphify-guard | 3 | 249,519 | 8 | 39.4s | 83% | 0.24 |
 | svc-004 | graphify-lean | 3 | 157,838 | 8 | 36.7s | 83% | 0.19 |
-| svc-004 | serena | 3 | 61,022 | 5 | 17.5s | 100% | 0.30 |
+| svc-004 | serena-forced | 3 | 140,575 | 6 | 43.2s | 67% | 0.60 |
 | svc-005 | baseline | 3 | 238,243 | 10 | 62.6s | 50% | 0.21 |
 | svc-005 | graphify | 3 | 444,958 | 11 | 82.2s | 50% | 0.21 |
 | svc-005 | graphify-federated | 3 | 1,009,385 | 23 | 149.2s | 50% | 0.12 |
@@ -175,7 +189,7 @@
 | svc-006 | graphify | 3 | 130,764 | 5 | 15.5s | 50% | 0.25 |
 | svc-006 | graphify-guard | 3 | 101,062 | 4 | 11.6s | 67% | 0.15 |
 | svc-006 | graphify-lean | 3 | 103,046 | 6 | 14.7s | 83% | 0.20 |
-| svc-006 | serena | 3 | 30,462 | 2 | 5.5s | 50% | 0.00 |
+| svc-006 | serena-forced | 3 | 91,816 | 5 | 17.3s | 50% | 0.24 |
 | svc-007 | baseline | 3 | 83,384 | 5 | 20.1s | 83% | 0.25 |
 | svc-007 | graphify | 3 | 418,048 | 12 | 83.9s | 83% | 0.25 |
 | svc-007 | graphify-federated | 3 | 544,179 | 13 | 81.6s | 100% | 0.07 |
@@ -183,40 +197,43 @@
 | svc-008 | graphify | 3 | 282,123 | 9 | 44.9s | 100% | 0.16 |
 | svc-008 | graphify-guard | 3 | 240,496 | 8 | 37.8s | 100% | 0.16 |
 | svc-008 | graphify-lean | 3 | 229,663 | 11 | 42.4s | 100% | 0.03 |
-| svc-008 | serena | 3 | 163,444 | 8 | 37.5s | 100% | 0.08 |
+| svc-008 | serena-forced | 3 | 284,301 | 12 | 53.8s | 100% | 0.07 |
 | svc-009 | baseline | 3 | 110,979 | 6 | 30.0s | 100% | 0.17 |
 | svc-009 | graphify | 3 | 202,849 | 7 | 32.1s | 100% | 0.09 |
 | svc-009 | graphify-guard | 3 | 207,989 | 7 | 32.1s | 100% | 0.18 |
-| svc-009 | serena | 3 | 128,932 | 7 | 29.8s | 100% | 0.12 |
 | svc-010 | baseline | 3 | 141,723 | 8 | 42.1s | 33% | 0.13 |
 | svc-010 | graphify | 3 | 230,132 | 8 | 36.6s | 100% | 0.12 |
 | svc-010 | graphify-guard | 3 | 264,710 | 9 | 41.4s | 67% | 0.06 |
-| svc-010 | serena | 3 | 148,613 | 8 | 39.1s | 33% | 0.10 |
 | web-001 | baseline | 3 | 60,649 | 4 | 11.9s | 100% | 0.12 |
 | web-001 | graphify | 3 | 131,629 | 5 | 17.5s | 100% | 0.10 |
 | web-001 | graphify-guard | 3 | 131,339 | 5 | 15.9s | 100% | 0.18 |
 | web-001 | graphify-lean | 3 | 82,088 | 5 | 13.5s | 100% | 0.10 |
 | web-001 | serena | 3 | 53,957 | 3 | 11.2s | 100% | 0.12 |
+| web-001 | serena-forced | 3 | 135,715 | 6 | 28.7s | 100% | 0.17 |
 | web-002 | baseline | 3 | 62,697 | 5 | 15.7s | 100% | 0.23 |
 | web-002 | graphify | 3 | 135,639 | 5 | 21.5s | 100% | 0.19 |
 | web-002 | graphify-guard | 3 | 163,877 | 6 | 23.4s | 67% | 0.14 |
 | web-002 | graphify-lean | 3 | 101,944 | 6 | 16.3s | 100% | 0.01 |
 | web-002 | serena | 3 | 62,255 | 4 | 16.0s | 100% | 0.01 |
+| web-002 | serena-forced | 3 | 99,282 | 4 | 23.7s | 100% | 0.29 |
 | web-003 | baseline | 3 | 88,730 | 5 | 23.5s | 100% | 0.07 |
 | web-003 | graphify | 3 | 164,425 | 6 | 30.2s | 100% | 0.17 |
 | web-003 | graphify-guard | 3 | 223,158 | 8 | 28.2s | 100% | 0.46 |
 | web-003 | graphify-lean | 3 | 128,293 | 7 | 33.2s | 100% | 0.12 |
 | web-003 | serena | 3 | 90,028 | 5 | 20.9s | 100% | 0.19 |
+| web-003 | serena-forced | 3 | 144,072 | 6 | 43.5s | 100% | 0.07 |
 | web-004 | baseline | 3 | 90,665 | 7 | 24.2s | 100% | 0.11 |
 | web-004 | graphify | 3 | 235,652 | 8 | 42.1s | 100% | 0.23 |
 | web-004 | graphify-guard | 3 | 503,294 | 13 | 92.7s | 83% | 0.39 |
 | web-004 | graphify-lean | 3 | 144,151 | 8 | 37.7s | 100% | 0.13 |
 | web-004 | serena | 3 | 86,540 | 5 | 22.9s | 100% | 0.13 |
+| web-004 | serena-forced | 3 | 132,083 | 5 | 39.5s | 100% | 0.05 |
 | web-005 | baseline | 3 | 86,903 | 5 | 18.6s | 83% | 0.14 |
 | web-005 | graphify | 3 | 180,819 | 6 | 29.1s | 67% | 0.31 |
 | web-005 | graphify-guard | 3 | 452,858 | 13 | 66.7s | 50% | 0.02 |
 | web-005 | graphify-lean | 3 | 136,144 | 7 | 22.2s | 67% | 0.15 |
 | web-005 | serena | 3 | 85,694 | 5 | 18.6s | 83% | 0.12 |
+| web-005 | serena-forced | 3 | 130,213 | 6 | 27.1s | 50% | 0.20 |
 | web-006 | baseline | 3 | 129,290 | 6 | 32.8s | 50% | 0.10 |
 | web-006 | graphify | 3 | 206,814 | 7 | 40.1s | 50% | 0.06 |
 | web-006 | graphify-federated | 3 | 270,721 | 9 | 47.8s | 50% | 0.06 |
@@ -228,11 +245,13 @@
 | web-009 | graphify-guard | 3 | 282,080 | 9 | 45.5s | 100% | 0.02 |
 | web-009 | graphify-lean | 3 | 176,841 | 9 | 34.8s | 100% | 0.07 |
 | web-009 | serena | 3 | 173,671 | 8 | 44.0s | 100% | 0.09 |
+| web-009 | serena-forced | 3 | 186,641 | 8 | 45.6s | 100% | 0.24 |
 | web-010 | baseline | 3 | 148,095 | 8 | 49.5s | 100% | 0.05 |
 | web-010 | graphify | 3 | 268,022 | 9 | 60.9s | 100% | 0.12 |
 | web-010 | graphify-guard | 3 | 276,869 | 9 | 65.0s | 100% | 0.07 |
 | web-010 | graphify-lean | 3 | 201,654 | 10 | 57.7s | 100% | 0.05 |
 | web-010 | serena | 3 | 190,900 | 8 | 69.0s | 100% | 0.11 |
+| web-010 | serena-forced | 3 | 185,948 | 9 | 66.8s | 67% | 0.11 |
 
 Models seen: copilot-search-a, gpt-6-luna, mai-code-1.1-flash · Copilot versions: 1.0.105
 
