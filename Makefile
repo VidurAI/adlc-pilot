@@ -3,11 +3,14 @@ SHELL := /bin/zsh
 ROOT  := $(abspath .)
 KIT   := $(ROOT)/adlc-kit
 ADLC  := $(KIT)/.venv/bin/adlc
-ENV   := source $(ROOT)/.toolchain/env.sh;
+ENV   := export ADLC_ROOT=$(ROOT); source $(ROOT)/.toolchain/env.sh;
 REPOS := kestrel-services kestrel-web kestrel-ops
 export GRAPHIFY_BACKEND=none
 
-.PHONY: all org kit init doctor baseline federate tasks tier1 tier1-lean tier1-serena-forced tier2 tier3 scorecard monitor adoption clean-runs
+.PHONY: bootstrap all org kit init doctor baseline federate tasks tier1 tier1-lean tier1-serena-forced tier2 tier3 scorecard monitor adoption clean-runs
+
+bootstrap:         ## bare macOS -> everything `make all` needs (brew, JDK 21, .NET 8+10, node, Copilot CLI 1.0.105, uv, nested repos, raw runs)
+	scripts/bootstrap.sh
 
 kit:               ## install the kit into its own venv (editable) and lock
 	cd $(KIT) && uv venv -q --clear -p 3.12 .venv && uv pip install -q -p .venv/bin/python -e ".[dev]" && uv lock -q && .venv/bin/adlc pins && .venv/bin/pytest -q

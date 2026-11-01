@@ -225,3 +225,19 @@ My "is the chain running" check landed inside the chain's 30 s sleep, so I launc
 
 ## 2026-11-01 — plain serena re-measured (24 runs); Serena verdict final
 Tier 1 services: 51k tokens / 80 % vs baseline 63k / 77 %, Serena used 1/15. Tier 2: 140k / 100 % vs 115k / 78 %, Serena used 2/9, both on svc-010 (Java JPA edit, baseline 0/0/2 → 2/2/2; one pass with zero Serena calls). Verdict written into the ADR: offered = ignored; forced = slower and no better; keep pinned per service for type-aware Java/C# edits; not a default. Scorecard regenerated (378 valid runs). Kit tagged v0.1.5 with the three Serena fixes, the eval lock, the lean default and the regress cache.
+
+### 2026-11-01 — transfer to another machine: six private GitHub repos + raw-runs release
+**Decision.** Pilot, kit and four Kestrel repos pushed as private repos under `VidurAI`
+(`adlc-pilot`, `adlc-kit`, `kestrel-services`, `kestrel-web`, `kestrel-ops`, `kestrel-notify`).
+`results/runs/` (311 MB, gitignored) shipped as `results-runs-2026-11-01.tgz` on the
+pilot's `runs-2026-11-01` release. `make bootstrap` (`scripts/bootstrap.sh`) stands up a
+bare Mac: brew packages, Copilot CLI 1.0.105, .NET 8 SDK + 10 runtime, inner clones, runs
+tarball, `make kit`, `adlc doctor`. `.toolchain/env.sh` made relocatable (`ADLC_ROOT`,
+JDK via brew path or `java_home`). `TRANSFER.md` documents it.
+**Why.** None of the six repos had a remote; one disk failure would have erased the
+evidence behind 378 published runs. The chat transcript is portable but compacted; the
+repo is the durable continuation.
+**Checked before push.** Secret-pattern sweep over every tracked file in all six repos
+and all 1859 files under `results/`: zero hits (one scrubber test fixture excluded).
+**Correction.** `org/kestrel-project` was called a separate repo in conversation; it is
+a tracked directory of the pilot. Six repos, not seven.
