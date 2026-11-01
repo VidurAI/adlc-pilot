@@ -28,11 +28,12 @@ baseline/serena runs). Prompt tokens = input + cache reads + cache writes per se
 | arm | n | prompt tokens p50 / p90 | model calls p50 | wall p50 / p90 | correctness | edit pass |
 |---|---|---|---|---|---|---|
 | baseline | 36 | 87k / 167k | 5 | 19.3s / 39.7s | 86% | 89% |
-| serena | 36 | 76k / 182k | 5 | 20.1s / 44.3s | 89% | 100% |
+| serena § | 36 | 86k / 190k | 5 | 22.0s / 46.2s | 90% | 100% |
 | graphify | 36 | 204k / 319k | 7 | 31.4s / 60.4s | 85% | 100% |
 | graphify-lean † | 36 | 142k / 230k | 8 | 33.4s / 50.5s | 90% | 100% |
 | graphify-guard | 36 | 242k / 462k | 8 | 38.6s / 75.6s | 82% | 100% |
 
+§ 21 web runs from 2026-10-30 + 15 services runs re-run 2026-11-01 with Serena actually connected (see Correction). Serena tools used in 2 of 36.
 † Run 2026-11-01 (new quota month), same tasks, same judge, same resolved model. Kit-authored
 1.9 KB skill in place of the vendor's 48 KB SKILL.md + 48 KB references; everything else
 identical to the graphify arm. Graph actually queried in 31/36 runs (vendor: 19/36).
@@ -94,7 +95,7 @@ judged by overlay tests, not by the model.
 | arm | n | prompt tokens p50 | calls p50 | wall p50 | correctness | Serena used | graph queried |
 |---|---|---|---|---|---|---|---|
 | baseline | 9 | 115k | 6 | 30s | 78% | — | — |
-| serena | 9 | 127k | 7 | 30s | 72% | 0/9 | — |
+| serena ¶ | 9 | 140k / 159k | 6 | 36.2s / 48.9s | 100% | 100% |
 | graphify | 9 | 230k | 8 | 33s | 100% | — | 1/9 |
 | graphify-guard | 9 | 265k | 9 | 36s | 89% | — | 2/9 |
 
@@ -106,6 +107,8 @@ hypothesis ("symbol tools matter where grep is weakest") is untested, not refute
 Graphify arms queried the graph in only 1–2 of 9 runs here; the svc-010 win came with the
 skill loaded but mostly without graph queries — the mechanism is unclear and the sample
 is small. Thresholds below are unchanged by Tier 2.
+
+¶ Tier 2 serena re-run 2026-11-01 with Serena connected (original 9 runs had no Serena: invalid). Tools used in 2 of 9, both on the Java JPA edit svc-010, which went 0/0/2 (baseline) → 2/2/2; one of those three passes made no Serena call. svc-002 and svc-009 were already 3/3 in every arm.
 
 ## Results — Tier 3 (KB, cross-repo, cross-project; 15 tasks × 3 arms × 3 runs = 135 attempted, 126 valid)
 Arms: baseline, graphify, graphify-federated (graphify + `project-graph.json` so `adlc query --level`
@@ -207,9 +210,25 @@ unproven: the agent does not reach for it voluntarily (1/21 on web, where it was
 available), and when forced to it is slower and no more correct than grep on this org's
 code. It is not recommended as a default context layer. It remains the right tool for the
 one job grep cannot do, type-aware symbol edits across files, and the kit keeps the
-pin and the per-service configuration for teams that want it. The plain serena arm on
-services and Tier 2 (Java/C#, where grep is weakest) is being re-measured with Serena
-present; rows appear here when they land.
+pin and the per-service configuration for teams that want it. 
+Plain serena, re-run with Serena present (24 runs, 2026-11-01):
+
+| slice | arm | n | prompt tokens p50 | wall p50 | correctness | edit pass | runs using Serena |
+|---|---|---|---|---|---|---|---|
+| Tier 1 services (5 tasks) | baseline | 15 | 63k | 17.6s | 77% | 100% | 0/15 |
+| Tier 1 services | serena | 15 | 51k | 22.2s | 80% | 100% | 1/15 |
+| Tier 1 services | serena-forced | 15 | 134k | 36.5s | 73% | 100% | 12/15 |
+| Tier 2 Java + C# (3 tasks) | baseline | 9 | 115k | 30.0s | 78% | 67% | 0/9 |
+| Tier 2 Java + C# | serena | 9 | 140k | 36.2s | 100% | 100% | 2/9 |
+| Tier 2 Java + C# | graphify | 9 | 230k | 33.4s | 100% | 100% | 0/9 |
+
+**Final Serena verdict.** Offered, Serena is used in 2 of 36 Tier 1 runs and 2 of 9 Tier 2
+runs; the plain arm is baseline with a 0.8 s MCP launch tax and run-to-run noise. Forced,
+it is 1.6× tokens, 2.1× wall, −4 pts. The one task where Serena-arm runs beat baseline is
+the Java JPA edit (3/3 vs 1/3, n = 3, one pass without any Serena call), the same task
+Graphify wins. Not a default context layer; keep it pinned and configured per service for
+teams doing type-aware edits in Java/C#, and re-test when Copilot CLI changes how it
+selects tools.
 
 ## Operating cost per tool (measured where marked)
 | Item | Cost | Measured? |

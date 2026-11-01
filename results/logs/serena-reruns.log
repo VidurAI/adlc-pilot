@@ -1,0 +1,27 @@
+svc-001__serena__r1: score=2 tokens=6+274 calls=2 wall=9284ms
+svc-001__serena__r2: score=2 tokens=9+289 calls=3 wall=9588ms
+svc-001__serena__r3: score=2 tokens=9+205 calls=3 wall=9894ms
+svc-003__serena__r1: score=1 tokens=5094+3038 calls=6 wall=46190ms
+svc-003__serena__r2: score=1 tokens=9+1202 calls=3 wall=20620ms
+svc-003__serena__r3: score=1 tokens=12+1691 calls=4 wall=26530ms
+svc-004__serena__r1: score=2 tokens=9+1111 calls=3 wall=23484ms
+svc-004__serena__r2: score=2 tokens=21+1617 calls=7 wall=28953ms
+svc-004__serena__r3: score=2 tokens=15+1407 calls=5 wall=22202ms
+svc-006__serena__r1: score=1 tokens=6+111 calls=2 wall=6994ms
+svc-006__serena__r2: score=1 tokens=6+139 calls=2 wall=7075ms
+svc-006__serena__r3: score=1 tokens=6+129 calls=2 wall=7234ms
+svc-008__serena__r1: score=2 tokens=3737+2767 calls=7 wall=40576ms
+svc-008__serena__r2: score=2 tokens=3793+2453 calls=7 wall=42843ms
+svc-008__serena__r3: score=2 tokens=3797+2744 calls=7 wall=40334ms
+eval: 15 new run(s) → /Users/hpatil/ADLC/results/2026-11-01-tier1-serena-rerun.jsonl
+svc-002__serena__r1: score=2 tokens=18686+2638 calls=6 wall=18680ms
+svc-002__serena__r2: score=2 tokens=15+1343 calls=5 wall=21157ms
+svc-002__serena__r3: score=2 tokens=18+1412 calls=6 wall=23962ms
+svc-009__serena__r1: score=2 tokens=3974+2718 calls=6 wall=37265ms
+svc-009__serena__r2: score=2 tokens=5081+1717 calls=6 wall=31643ms
+svc-009__serena__r3: score=2 tokens=2925+2771 calls=6 wall=36239ms
+svc-010__serena__r1: score=2 tokens=5328+2331 calls=6 wall=48876ms
+svc-010__serena__r2: score=2 tokens=2800+2266 calls=7 wall=45618ms
+svc-010__serena__r3: score=2 tokens=2677+2444 calls=8 wall=55170ms
+eval: 9 new run(s) → /Users/hpatil/ADLC/results/2026-11-01-tier2-serena-rerun.jsonl
+SERENA RERUNS DONE

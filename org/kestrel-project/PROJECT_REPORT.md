@@ -1,13 +1,13 @@
-# Project graph — kestrel  (2026-11-01T15:08:45+00:00)
+# Project graph — kestrel  (2026-11-01T15:57:26+00:00)
 
-- 2164 nodes · 5374 edges · kit 0.1.4
+- 2164 nodes · 5374 edges · kit 0.1.5
 
 ## Members (freshness stamps)
 | repo | commit_sha |
 |---|---|
-| kestrel-services | `12c1b6d0c51e` |
-| kestrel-web | `04df6672f7a1` |
-| kestrel-ops | `2989b162f913` |
+| kestrel-services | `5026f197ce40` |
+| kestrel-web | `9f8f1a9eb362` |
+| kestrel-ops | `73745f8af15d` |
 
 ## Cross-repo resolvers
 | resolver | edges | nodes | ambiguous |

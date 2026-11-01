@@ -8,3 +8,5 @@ results/runs/
 adlc-kit/
 repos/
 org/kestrel-project/.git/
+
+results/*.lock

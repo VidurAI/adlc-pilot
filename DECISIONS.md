@@ -219,3 +219,9 @@ With Serena connected and the .NET 10 runtime in place, svc-001 scored 2/2/2 but
 
 ## 2026-11-01 — serena-forced arm complete (36 runs)
 Serena live in every service (probes: python 1 s, C# 2 s, Java 4 s). Result: 141k tokens p50 (1.6× baseline), 41 s wall (2.1×), 82 % correctness (−4), Serena used in 33/36 runs, 8 calls p50. Never beat baseline on a task. Verdict re-issued in the ADR as "measured, not recommended as default; keep for type-aware edits". Observation kept as a finding, not acted on mid-run: the agent probes 2–3 path forms before Serena accepts one; a one-line "paths are relative to this directory" hint belongs in a follow-up arm, not in this measurement.
+
+## 2026-11-01 — operator error: two rerun chains ran at once for ~4 runs
+My "is the chain running" check landed inside the chain's 30 s sleep, so I launched a second one; both wrote the same results file and ran Copilot sessions concurrently. Wall-clock is a reported metric, so the 4 affected records are quarantined (`.concurrent-duplicate-chain`) rather than kept; file deleted; one chain relaunched. Harness follow-up: `adlc eval` should take an exclusive lock on its out file.
+
+## 2026-11-01 — plain serena re-measured (24 runs); Serena verdict final
+Tier 1 services: 51k tokens / 80 % vs baseline 63k / 77 %, Serena used 1/15. Tier 2: 140k / 100 % vs 115k / 78 %, Serena used 2/9, both on svc-010 (Java JPA edit, baseline 0/0/2 → 2/2/2; one pass with zero Serena calls). Verdict written into the ADR: offered = ignored; forced = slower and no better; keep pinned per service for type-aware Java/C# edits; not a default. Scorecard regenerated (378 valid runs). Kit tagged v0.1.5 with the three Serena fixes, the eval lock, the lean default and the regress cache.
