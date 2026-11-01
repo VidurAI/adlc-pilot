@@ -198,3 +198,6 @@ everything here is reversible by the pilot owner.
   web-008 re-runs next month (`make tier3` resumes).
 - **The `both` arm was not run**, per the spec's condition: no context arm beat baseline
   alone in Tiers 1–2.
+
+## 2026-11-01 — devcontainer is optional, not required
+The kit never read the devcontainer; the pilot ran entirely on the dev machine. Made that explicit: `adlc init --no-devcontainer`, doctor WARN not FAIL, ADOPT.md bare-machine prerequisites. Devcontainer stays the distributable for teams with Docker. Unreleased in CHANGELOG; tag on next release, not for a flag.
