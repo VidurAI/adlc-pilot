@@ -1,0 +1,1 @@
+source /Users/hpatil/ADLC/.toolchain/env.sh; COPILOT_GITHUB_TOKEN=${COPILOT_GITHUB_TOKEN:-$(gh auth token)} /Users/hpatil/ADLC/adlc-kit/.venv/bin/adlc eval --tier 1 --arms serena-forced --runs 3 --results results --out 2026-11-01-tier1-serena-forced.jsonl

@@ -1,0 +1,56 @@
+{
+  "run_id": "svc-001__serena-forced__r3",
+  "task": "svc-001",
+  "repo": "kestrel-services",
+  "category": "literal",
+  "languages": [
+    "python"
+  ],
+  "tier": 1,
+  "arm": "serena-forced",
+  "run": 3,
+  "started_at": "2026-11-01T15:01:35+00:00",
+  "exit_code": 0,
+  "wall_ms": 17231,
+  "api_duration_ms": 13578,
+  "prompt_tokens": 36319,
+  "input_tokens": 2723,
+  "output_tokens": 541,
+  "cache_read_tokens": 26680,
+  "cache_write_tokens": 6916,
+  "reasoning_tokens": 359,
+  "premium_requests": 1,
+  "premium_requests_stdout": 1,
+  "premium_reason": null,
+  "model_calls": 2,
+  "premium_cost_sum": 2.0,
+  "nano_aiu": 167410000,
+  "models": [
+    "gpt-6-luna"
+  ],
+  "copilot_version": "1.0.105",
+  "turns": 2,
+  "tool_calls": {
+    "glob": 1,
+    "serena-find_symbol": 1
+  },
+  "mcp_tool_calls": {
+    "serena-find_symbol": 1
+  },
+  "bytes_read": 1131,
+  "skills_invoked": [],
+  "graph_queries": 0,
+  "session_error": null,
+  "valid": true,
+  "freshness_exit": 0,
+  "freshness_behind": 0,
+  "answer": "I couldn\u2019t verify the message or its status and machine code: Serena failed to initialize because .NET 10 is required, and its instructions say to stop rather than work around the issue. Please make .NET 10 available, then I can look it up.",
+  "judge_score": 0,
+  "diff_hash": "c0a6bdff97172c30",
+  "diff_lines": 87,
+  "raw": "runs/svc-001__serena-forced__r3",
+  "judge_reason": "It does not identify the file, status, or machine code.",
+  "judge_premium_requests": 1,
+  "judge_raw": "{\"score\":0,\"reason\":\"It does not identify the file, status, or machine code.\"}",
+  "dry_run": false
+}

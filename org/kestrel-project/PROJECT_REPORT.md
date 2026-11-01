@@ -1,13 +1,13 @@
-# Project graph — kestrel  (2026-11-01T12:03:54+00:00)
+# Project graph — kestrel  (2026-11-01T15:00:28+00:00)
 
-- 2161 nodes · 5374 edges · kit 0.1.4
+- 2164 nodes · 5374 edges · kit 0.1.4
 
 ## Members (freshness stamps)
 | repo | commit_sha |
 |---|---|
-| kestrel-services | `6cd04c88d80e` |
-| kestrel-web | `838f7794d3cb` |
-| kestrel-ops | `1b41f15a0fae` |
+| kestrel-services | `2f04b6035a69` |
+| kestrel-web | `dc305c3af355` |
+| kestrel-ops | `6b8b7f0adfbd` |
 
 ## Cross-repo resolvers
 | resolver | edges | nodes | ambiguous |
@@ -15,7 +15,7 @@
 | ownership | 33 | 14 | 0 |
 | http-contract | 29 | 16 | 0 |
 | shared-package | 0 | 0 | 0 |
-| doc-reference | 243 | 61 | 0 |
+| doc-reference | 243 | 64 | 0 |
 
 ## HTTP contracts (provider → consumers)
 - `GET /api/carriers` provided by **kestrel-services/gateway** ← kestrel-web:src/api/client.ts
@@ -56,4 +56,4 @@
 ## AMBIGUOUS — needs a human (0)
 
 ## Diff vs previous build
-- 24 nodes removed
+- 3 new nodes

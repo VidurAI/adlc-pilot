@@ -1,0 +1,57 @@
+{
+  "run_id": "svc-001__serena-forced__r1",
+  "task": "svc-001",
+  "repo": "kestrel-services",
+  "category": "literal",
+  "languages": [
+    "python"
+  ],
+  "tier": 1,
+  "arm": "serena-forced",
+  "run": 1,
+  "started_at": "2026-11-01T15:00:50+00:00",
+  "exit_code": 0,
+  "wall_ms": 21954,
+  "api_duration_ms": 10274,
+  "prompt_tokens": 36476,
+  "input_tokens": 2835,
+  "output_tokens": 583,
+  "cache_read_tokens": 26788,
+  "cache_write_tokens": 6853,
+  "reasoning_tokens": 433,
+  "premium_requests": 1,
+  "premium_requests_stdout": 1,
+  "premium_reason": null,
+  "model_calls": 2,
+  "premium_cost_sum": 2.0,
+  "nano_aiu": 169950500,
+  "models": [
+    "gpt-6-luna"
+  ],
+  "copilot_version": "1.0.105",
+  "turns": 2,
+  "tool_calls": {
+    "serena-get_symbols_overview": 2,
+    "serena-find_symbol": 1
+  },
+  "mcp_tool_calls": {
+    "serena-get_symbols_overview": 2,
+    "serena-find_symbol": 1
+  },
+  "bytes_read": 0,
+  "skills_invoked": [],
+  "graph_queries": 0,
+  "session_error": null,
+  "valid": true,
+  "freshness_exit": 0,
+  "freshness_behind": 0,
+  "answer": "I couldn\u2019t inspect the gateway: Serena failed to initialize because .NET 10 is required, but only .NET 8 is installed. I\u2019m stopping here as instructed; please install .NET 10 and retry.",
+  "judge_score": 0,
+  "diff_hash": "c0a6bdff97172c30",
+  "diff_lines": 87,
+  "raw": "runs/svc-001__serena-forced__r1",
+  "judge_reason": "The answer does not identify the defining file, message class, HTTP status, or machine code.",
+  "judge_premium_requests": 1,
+  "judge_raw": "{\"score\":0,\"reason\":\"The answer does not identify the defining file, message class, HTTP status, or machine code.\"}",
+  "dry_run": false
+}

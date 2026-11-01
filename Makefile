@@ -7,7 +7,7 @@ ENV   := source $(ROOT)/.toolchain/env.sh;
 REPOS := kestrel-services kestrel-web kestrel-ops
 export GRAPHIFY_BACKEND=none
 
-.PHONY: all org kit init doctor baseline federate tasks tier1 tier1-lean tier2 tier3 scorecard monitor adoption clean-runs
+.PHONY: all org kit init doctor baseline federate tasks tier1 tier1-lean tier1-serena-forced tier2 tier3 scorecard monitor adoption clean-runs
 
 kit:               ## install the kit into its own venv (editable) and lock
 	cd $(KIT) && uv venv -q --clear -p 3.12 .venv && uv pip install -q -p .venv/bin/python -e ".[dev]" && uv lock -q && .venv/bin/adlc pins && .venv/bin/pytest -q
@@ -39,6 +39,9 @@ tier1:
 
 tier1-lean:        ## graphify-lean arm over Tier 1 (same tasks/judge as tier1)
 	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --arms graphify-lean --runs 3 --results results --out tier1-lean.jsonl
+
+tier1-serena-forced: ## serena-forced arm over Tier 1 (text search denied; Serena symbol tools only)
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --arms serena-forced --runs 3 --results results --out 2026-11-01-tier1-serena-forced.jsonl
 
 tier2:
 	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 2 --runs 3 --results results --out tier2.jsonl

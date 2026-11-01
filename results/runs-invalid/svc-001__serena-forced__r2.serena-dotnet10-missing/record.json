@@ -1,0 +1,57 @@
+{
+  "run_id": "svc-001__serena-forced__r2",
+  "task": "svc-001",
+  "repo": "kestrel-services",
+  "category": "literal",
+  "languages": [
+    "python"
+  ],
+  "tier": 1,
+  "arm": "serena-forced",
+  "run": 2,
+  "started_at": "2026-11-01T15:01:17+00:00",
+  "exit_code": 0,
+  "wall_ms": 11044,
+  "api_duration_ms": 7291,
+  "prompt_tokens": 32815,
+  "input_tokens": 1124,
+  "output_tokens": 417,
+  "cache_read_tokens": 25081,
+  "cache_write_tokens": 6610,
+  "reasoning_tokens": 290,
+  "premium_requests": 1,
+  "premium_requests_stdout": 1,
+  "premium_reason": null,
+  "model_calls": 2,
+  "premium_cost_sum": 2.0,
+  "nano_aiu": 139796000,
+  "models": [
+    "gpt-6-luna"
+  ],
+  "copilot_version": "1.0.105",
+  "turns": 2,
+  "tool_calls": {
+    "serena-list_memories": 1,
+    "serena-find_symbol": 1
+  },
+  "mcp_tool_calls": {
+    "serena-list_memories": 1,
+    "serena-find_symbol": 1
+  },
+  "bytes_read": 0,
+  "skills_invoked": [],
+  "graph_queries": 0,
+  "session_error": null,
+  "valid": true,
+  "freshness_exit": 0,
+  "freshness_behind": 0,
+  "answer": "I couldn\u2019t locate it: Serena failed to initialize because .NET 10 is required, but only .NET 8 is installed. Its instructions say to stop rather than work around the initialization failure.",
+  "judge_score": 0,
+  "diff_hash": "c0a6bdff97172c30",
+  "diff_lines": 87,
+  "raw": "runs/svc-001__serena-forced__r2",
+  "judge_reason": "It did not identify errors.py, BookingUnavailable, the status, or the machine code.",
+  "judge_premium_requests": 1,
+  "judge_raw": "{\"score\":0,\"reason\":\"It did not identify errors.py, BookingUnavailable, the status, or the machine code.\"}",
+  "dry_run": false
+}

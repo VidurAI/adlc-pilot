@@ -1,0 +1,58 @@
+{
+  "run_id": "svc-003__serena-forced__r2",
+  "task": "svc-003",
+  "repo": "kestrel-services",
+  "category": "trace",
+  "languages": [
+    "python"
+  ],
+  "tier": 1,
+  "arm": "serena-forced",
+  "run": 2,
+  "started_at": "2026-11-01T15:02:22+00:00",
+  "exit_code": 0,
+  "wall_ms": 19787,
+  "api_duration_ms": 16315,
+  "prompt_tokens": 62200,
+  "input_tokens": 5132,
+  "output_tokens": 874,
+  "cache_read_tokens": 49817,
+  "cache_write_tokens": 7251,
+  "reasoning_tokens": 619,
+  "premium_requests": 1,
+  "premium_requests_stdout": 1,
+  "premium_reason": null,
+  "model_calls": 3,
+  "premium_cost_sum": 3.0,
+  "nano_aiu": 235474500,
+  "models": [
+    "gpt-6-luna"
+  ],
+  "copilot_version": "1.0.105",
+  "turns": 3,
+  "tool_calls": {
+    "glob": 5,
+    "serena-list_memories": 1,
+    "serena-get_symbols_overview": 2
+  },
+  "mcp_tool_calls": {
+    "serena-list_memories": 1,
+    "serena-get_symbols_overview": 2
+  },
+  "bytes_read": 702,
+  "skills_invoked": [],
+  "graph_queries": 0,
+  "session_error": null,
+  "valid": true,
+  "freshness_exit": 0,
+  "freshness_behind": 0,
+  "answer": "I couldn\u2019t determine the dependency list: Serena failed to initialize because .NET 10 is required but only .NET 8 is installed. The repository instructions prohibit using text search as a workaround, so I stopped without making changes.",
+  "judge_score": 0,
+  "diff_hash": "c0a6bdff97172c30",
+  "diff_lines": 87,
+  "raw": "runs/svc-003__serena-forced__r2",
+  "judge_reason": "It does not answer what depends on the package or whether deletion is safe.",
+  "judge_premium_requests": 1,
+  "judge_raw": "{\"score\":0,\"reason\":\"It does not answer what depends on the package or whether deletion is safe.\"}",
+  "dry_run": false
+}

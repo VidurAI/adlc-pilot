@@ -53,6 +53,19 @@ tokens, 1.7× wall. On every one of the 12 tasks lean sat between baseline and v
 tokens; it never beat baseline. The remaining cost is the graph output and the extra model
 calls it triggers (8 vs 5), not the instructions.
 
+**Correction (2026-11-01) — the serena arm was not what it claimed on kestrel-services.**
+Two defects, both found only when an arm forced the agent onto Serena:
+1. Copilot CLI 1.0.105 loads `.mcp.json` from the *working directory only*. Services tasks
+   run inside `gateway/`, `booking/` or `pricing/`, so Serena was never connected there
+   (probe: 0 serena tools from `gateway/`, 10 from the root). 15 Tier 1 and 9 Tier 2
+   serena-arm records are re-labelled invalid (`invalid_reason` set, listed in the
+   scorecard, never pooled). The kit now writes `<service>/.mcp.json`.
+2. With Serena connected, every call failed: Roslyn LS 5.5 needs the .NET 10 runtime and
+   the machine had .NET 8 only; one failing language server takes the whole Serena project
+   down. Runtime installed; `adlc doctor` now fails red on this.
+The serena row above is therefore kestrel-web only (n = 21, Serena connected, used once).
+The services numbers are being re-measured; see the 2026-11-01 rows below when present.
+
 **Tool adoption (the finding that explains the table).** Serena's MCP tools were used in
 **1 of 36** serena-arm runs (web-010 r2: `get_symbols_overview`, `find_symbol`); every other
 run used `rg`/`view`. The serena arm is therefore baseline with Serena connected and
@@ -148,10 +161,12 @@ Graphify arms fail tokens and wall in every category; graphify-lean is the close
    the threshold. Keep the graph build in CI because federation and the Tier 3 KB tasks
    depend on it; offer graphify-lean to teams whose work is edit-heavy on typed code
    (Tier 2 Java JPA edit 100 % vs 33 %), not as an org default.
-3. **Keep Serena configured but treat it as unproven on Copilot CLI 1.0.105 / gpt-6-luna**:
-   the agent does not pick symbol tools over `rg` even when the routing text says so.
-   Next experiment: a Serena arm whose routing section *requires* `find_referencing_symbols`
-   for trace tasks, and the Java/C# tasks (Tier 2 ⏳) where grep is weakest.
+3. **Serena: the pilot's original verdict ("unproven, agent ignores it") rested on 24
+   runs where Serena was not connected and 21 where it was connected but idle.** Both
+   causes were kit/environment defects, now fixed (per-service `.mcp.json`; .NET 10
+   runtime; doctor checks for both). The verdict is re-issued from the 2026-11-01 runs:
+   plain serena re-measured on services + Tier 2, and `serena-forced` (text search denied,
+   Serena the only search) on all of Tier 1. See "Serena, re-measured" below.
 4. The hierarchy (L1/L2) is kept: it is cheap (1.4 s build, 0 ambiguous contract edges on
    Kestrel) and answers questions no single-repo tool can. Tier 3 shows the federated arm
    actually using `adlc query --level` and a small edge on cross-repo tasks (67 % vs 50 %,

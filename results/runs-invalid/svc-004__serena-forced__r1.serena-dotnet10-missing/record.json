@@ -1,0 +1,58 @@
+{
+  "run_id": "svc-004__serena-forced__r1",
+  "task": "svc-004",
+  "repo": "kestrel-services",
+  "category": "trace",
+  "languages": [
+    "python"
+  ],
+  "tier": 1,
+  "arm": "serena-forced",
+  "run": 1,
+  "started_at": "2026-11-01T15:03:32+00:00",
+  "exit_code": 0,
+  "wall_ms": 15608,
+  "api_duration_ms": 12437,
+  "prompt_tokens": 58105,
+  "input_tokens": 3813,
+  "output_tokens": 666,
+  "cache_read_tokens": 46977,
+  "cache_write_tokens": 7315,
+  "reasoning_tokens": 418,
+  "premium_requests": 1,
+  "premium_requests_stdout": 1,
+  "premium_reason": null,
+  "model_calls": 3,
+  "premium_cost_sum": 3.0,
+  "nano_aiu": 209844500,
+  "models": [
+    "gpt-6-luna"
+  ],
+  "copilot_version": "1.0.105",
+  "turns": 3,
+  "tool_calls": {
+    "glob": 2,
+    "serena-list_memories": 1,
+    "serena-get_symbols_overview": 3
+  },
+  "mcp_tool_calls": {
+    "serena-list_memories": 1,
+    "serena-get_symbols_overview": 3
+  },
+  "bytes_read": 699,
+  "skills_invoked": [],
+  "graph_queries": 0,
+  "session_error": null,
+  "valid": true,
+  "freshness_exit": 0,
+  "freshness_behind": 0,
+  "answer": "I can\u2019t complete the lookup: Serena failed to initialize because .NET 10 is required but only .NET 8 is installed. I\u2019ve stopped as instructed.",
+  "judge_score": 0,
+  "diff_hash": "c0a6bdff97172c30",
+  "diff_lines": 87,
+  "raw": "runs/svc-004__serena-forced__r1",
+  "judge_reason": "It gives no retry policy, attempt count, decision point, or per-call distinctions.",
+  "judge_premium_requests": 1,
+  "judge_raw": "{\"score\":0,\"reason\":\"It gives no retry policy, attempt count, decision point, or per-call distinctions.\"}",
+  "dry_run": false
+}
