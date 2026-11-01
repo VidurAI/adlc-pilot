@@ -30,16 +30,28 @@ baseline/serena runs). Prompt tokens = input + cache reads + cache writes per se
 | baseline | 36 | 87k / 167k | 5 | 19.3s / 39.7s | 86% | 89% |
 | serena | 36 | 76k / 182k | 5 | 20.1s / 44.3s | 89% | 100% |
 | graphify | 36 | 204k / 319k | 7 | 31.4s / 60.4s | 85% | 100% |
+| graphify-lean † | 36 | 142k / 230k | 8 | 33.4s / 50.5s | 90% | 100% |
 | graphify-guard | 36 | 242k / 462k | 8 | 38.6s / 75.6s | 82% | 100% |
+
+† Run 2026-11-01 (new quota month), same tasks, same judge, same resolved model. Kit-authored
+1.9 KB skill in place of the vendor's 48 KB SKILL.md + 48 KB references; everything else
+identical to the graphify arm. Graph actually queried in 31/36 runs (vendor: 19/36).
 
 Per category (correctness; prompt tokens p50):
 
-| category | baseline | serena | graphify | graphify-guard |
-|---|---|---|---|---|
-| literal (n=9) | 83%; 47k | 83%; 45k | 83%; 131k | 89%; 104k |
-| locate (n=3) | 100%; 63k | 100%; 62k | 100%; 136k | 67%; 164k |
-| trace (n=15) | 83%; 89k | 83%; 87k | 73%; 205k | 70%; 408k |
-| edit (n=9) | 89%; 163k | 100%; 174k | 100%; 279k | 100%; 277k |
+| category | baseline | serena | graphify | graphify-lean | graphify-guard |
+|---|---|---|---|---|---|
+| literal (n=9) | 83%; 47k | 83%; 45k | 83%; 131k | 94%; 101k | 89%; 104k |
+| locate (n=3) | 100%; 63k | 100%; 62k | 100%; 136k | 100%; 102k | 67%; 164k |
+| trace (n=15) | 83%; 89k | 83%; 87k | 73%; 205k | 80%; 144k | 70%; 408k |
+| edit (n=9) | 89%; 163k | 100%; 174k | 100%; 279k | 100%; 202k | 100%; 277k |
+
+**Lean-skill result.** Cutting the skill text 25× removed about a third of the graphify
+arm's token cost (205k → 142k) and raised correctness to the best Tier 1 figure (90 %),
+with the graph consulted far more often. It did not close the gap to baseline: 1.6×
+tokens, 1.7× wall. On every one of the 12 tasks lean sat between baseline and vendor on
+tokens; it never beat baseline. The remaining cost is the graph output and the extra model
+calls it triggers (8 vs 5), not the instructions.
 
 **Tool adoption (the finding that explains the table).** Serena's MCP tools were used in
 **1 of 36** serena-arm runs (web-010 r2: `get_symbols_overview`, `find_symbol`); every other
@@ -120,7 +132,8 @@ baseline − 5 pts (≥ 81 %), wall p50 ≤ 1.2 × baseline (≤ 23 s). `literal
 the token criterion by design (grep should win).
 **Tier 1 outcome against these thresholds: no arm qualifies.** Serena meets the
 correctness and wall criteria but not tokens (76k) and, more importantly, was not used.
-Graphify arms fail tokens and wall in every category.
+Graphify arms fail tokens and wall in every category; graphify-lean is the closest
+(142k vs ≤ 70k; 33 s vs ≤ 23 s) and the only arm to clear the correctness bar by a margin.
 
 ## Decision
 1. **Adopt the contract and the kit now** (AGENTS.md + adlc block, routing, freshness,
@@ -128,9 +141,13 @@ Graphify arms fail tokens and wall in every category.
    adoption test shows ≤ 15 min onboarding. This is the durable asset.
 2. **Do not roll out Graphify as the default context layer on Copilot CLI.** At the
    vendor's shipped skill size it costs 2.3× tokens and 1.6× time for no correctness gain
-   on Tier 1. Re-test with a lean skill profile (`adlc init --skill-profile lean`, ~4 KB,
-   query/path/explain + freshness) as its own arm before any further decision; keep the
-   graph build in CI because federation and the KB tasks (Tier 3 ⏳) depend on it.
+   on Tier 1. The lean-skill re-test (2026-11-01) is done: `adlc init --skill-profile lean`
+   is now the kit default *when a team opts into graphify* because it is strictly better
+   than the vendor skill on every axis (−31 % tokens, +5 pts correctness, graph used in
+   86 % of runs), but it still costs 1.6× baseline tokens for +4 pts, which does not meet
+   the threshold. Keep the graph build in CI because federation and the Tier 3 KB tasks
+   depend on it; offer graphify-lean to teams whose work is edit-heavy on typed code
+   (Tier 2 Java JPA edit 100 % vs 33 %), not as an org default.
 3. **Keep Serena configured but treat it as unproven on Copilot CLI 1.0.105 / gpt-6-luna**:
    the agent does not pick symbol tools over `rg` even when the routing text says so.
    Next experiment: a Serena arm whose routing section *requires* `find_referencing_symbols`

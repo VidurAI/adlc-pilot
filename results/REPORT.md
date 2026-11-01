@@ -87,4 +87,4 @@ step pre-supplied (≈5 min typing in reality). Kit fixes needed: 0. Final tag: 
 - Devcontainer image never built; `act` not run (no Docker). Workflows verified by a stub runner.
 - Copilot model pinning unavailable on this account (auto, recorded per run).
 - Human spot-check not done (yours). Resolver false-positive hand-check on 29 edges not done.
-- Lean-skill arm (the obvious next experiment) not run.
+- Lean-skill arm: run 2026-11-01 (36 runs, `results/2026-11-01-tier1-lean.jsonl`): 142k tokens p50 (vendor 204k, baseline 87k), 90 % correctness, graph queried 31/36. Better than the vendor skill on every axis; still 1.6× baseline. Folded into `DECISION_ADR.md` Tier 1 and the scorecard.

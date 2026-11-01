@@ -1,5 +1,5 @@
 <!doctype html><meta charset='utf-8'><title>ADLC scorecard</title><style>body{font:14px system-ui;max-width:1200px;margin:2rem auto}table{border-collapse:collapse;margin:1rem 0}td{border:1px solid #ccc;padding:3px 8px;font-variant-numeric:tabular-nums}</style><h1>ADLC scorecard</h1>
-<p>306 valid runs · tasks 29 · arms [&#x27;baseline&#x27;, &#x27;graphify&#x27;, &#x27;graphify-federated&#x27;, &#x27;graphify-guard&#x27;, &#x27;serena&#x27;]</p>
+<p>342 valid runs · tasks 29 · arms [&#x27;baseline&#x27;, &#x27;graphify&#x27;, &#x27;graphify-federated&#x27;, &#x27;graphify-guard&#x27;, &#x27;graphify-lean&#x27;, &#x27;serena&#x27;]</p>
 <p>**Excluded: 9 invalid run(s)** (Copilot did not finish cleanly; never pooled):</p>
 <p>- web-008 — exit 1 — arms [&#x27;baseline&#x27;, &#x27;graphify&#x27;, &#x27;graphify-federated&#x27;]</p>
 <h2>By arm</h2>
@@ -8,6 +8,7 @@
 <tr><td>graphify</td><td>87</td><td>201,780/392,434</td><td>21</td><td>2,021</td><td>7</td><td>1</td><td>32.2s/68.5s</td><td>7</td><td>18,819</td><td>83%</td><td>100%</td><td>0.49</td></tr>
 <tr><td>graphify-federated</td><td>42</td><td>230,310/538,475</td><td>24</td><td>2,564</td><td>7</td><td>1</td><td>40.8s/81.1s</td><td>7</td><td>31,320</td><td>85%</td><td>—</td><td>0.80</td></tr>
 <tr><td>graphify-guard</td><td>45</td><td>242,535/453,978</td><td>24</td><td>2,272</td><td>8</td><td>1</td><td>37.8s/74.4s</td><td>8</td><td>13,960</td><td>83%</td><td>93%</td><td>0.48</td></tr>
+<tr><td>graphify-lean</td><td>36</td><td>140,324/223,982</td><td>24</td><td>2,034</td><td>8</td><td>1</td><td>33.3s/49.5s</td><td>8</td><td>16,777</td><td>90%</td><td>100%</td><td>0.34</td></tr>
 <tr><td>serena</td><td>45</td><td>90,028/172,588</td><td>15</td><td>1,583</td><td>5</td><td>1</td><td>22.9s/43.8s</td><td>5</td><td>12,549</td><td>86%</td><td>87%</td><td>0.51</td></tr></table>
 <h2>By arm × category</h2>
 <table><tr><td>arm</td><td>category</td><td>n</td><td>prompt tokens p50/p90</td><td>(uncached in p50)</td><td>out p50</td><td>calls p50</td><td>premium p50</td><td>wall p50/p90</td><td>turns p50</td><td>bytes read p50</td><td>correctness</td><td>edit pass</td><td>tokens CV</td></tr>
@@ -34,6 +35,10 @@
 <tr><td>graphify-guard</td><td>literal</td><td>9</td><td>103,750/167,967</td><td>12</td><td>581</td><td>4</td><td>1</td><td>13.1s/19.9s</td><td>4</td><td>2,942</td><td>89%</td><td>—</td><td>0.28</td></tr>
 <tr><td>graphify-guard</td><td>locate</td><td>6</td><td>184,223/284,855</td><td>20</td><td>1,754</td><td>6</td><td>1</td><td>28.4s/38.9s</td><td>6</td><td>17,190</td><td>83%</td><td>—</td><td>0.29</td></tr>
 <tr><td>graphify-guard</td><td>trace</td><td>15</td><td>407,615/504,546</td><td>36</td><td>3,975</td><td>12</td><td>1</td><td>61.3s/86.4s</td><td>12</td><td>34,310</td><td>70%</td><td>—</td><td>0.36</td></tr>
+<tr><td>graphify-lean</td><td>edit</td><td>9</td><td>201,654/229,701</td><td>30</td><td>2,923</td><td>10</td><td>1</td><td>42.4s/58.2s</td><td>10</td><td>17,757</td><td>100%</td><td>100%</td><td>0.12</td></tr>
+<tr><td>graphify-lean</td><td>literal</td><td>9</td><td>101,435/124,262</td><td>18</td><td>625</td><td>6</td><td>1</td><td>15.2s/18.4s</td><td>6</td><td>8,204</td><td>94%</td><td>—</td><td>0.17</td></tr>
+<tr><td>graphify-lean</td><td>locate</td><td>3</td><td>101,944/102,100</td><td>18</td><td>798</td><td>6</td><td>1</td><td>16.3s/17.9s</td><td>6</td><td>11,053</td><td>100%</td><td>—</td><td>0.01</td></tr>
+<tr><td>graphify-lean</td><td>trace</td><td>15</td><td>144,151/230,616</td><td>24</td><td>2,626</td><td>8</td><td>1</td><td>34.2s/48.0s</td><td>8</td><td>24,626</td><td>80%</td><td>—</td><td>0.29</td></tr>
 <tr><td>serena</td><td>edit</td><td>15</td><td>163,444/200,674</td><td>27</td><td>2,187</td><td>8</td><td>1</td><td>39.1s/64.6s</td><td>8</td><td>13,141</td><td>87%</td><td>87%</td><td>0.20</td></tr>
 <tr><td>serena</td><td>literal</td><td>9</td><td>45,332/55,343</td><td>9</td><td>246</td><td>3</td><td>1</td><td>10.4s/11.5s</td><td>3</td><td>474</td><td>83%</td><td>—</td><td>0.26</td></tr>
 <tr><td>serena</td><td>locate</td><td>6</td><td>76,180/97,702</td><td>14</td><td>1,080</td><td>4</td><td>1</td><td>19.2s/24.6s</td><td>4</td><td>8,436</td><td>92%</td><td>—</td><td>0.21</td></tr>
@@ -64,6 +69,8 @@
 <tr><td>graphify-guard</td><td>java</td><td>6</td><td>265,474/284,855</td><td>27</td><td>2,332</td><td>9</td><td>1</td><td>38.7s/49.2s</td><td>9</td><td>15,136</td><td>83%</td><td>67%</td><td>0.15</td></tr>
 <tr><td>graphify-guard</td><td>python</td><td>15</td><td>218,310/396,124</td><td>21</td><td>2,194</td><td>7</td><td>1</td><td>35.3s/61.3s</td><td>7</td><td>13,339</td><td>77%</td><td>100%</td><td>0.52</td></tr>
 <tr><td>graphify-guard</td><td>typescript</td><td>21</td><td>276,869/503,294</td><td>27</td><td>2,221</td><td>9</td><td>1</td><td>45.5s/76.9s</td><td>9</td><td>15,136</td><td>86%</td><td>100%</td><td>0.49</td></tr>
+<tr><td>graphify-lean</td><td>python</td><td>15</td><td>157,838/237,071</td><td>24</td><td>2,626</td><td>8</td><td>1</td><td>36.7s/48.0s</td><td>8</td><td>17,757</td><td>83%</td><td>100%</td><td>0.35</td></tr>
+<tr><td>graphify-lean</td><td>typescript</td><td>21</td><td>136,144/195,959</td><td>21</td><td>1,936</td><td>7</td><td>1</td><td>33.2s/50.5s</td><td>7</td><td>16,289</td><td>95%</td><td>100%</td><td>0.29</td></tr>
 <tr><td>serena</td><td>csharp</td><td>3</td><td>128,932/141,364</td><td>21</td><td>2,150</td><td>7</td><td>1</td><td>29.8s/32.2s</td><td>7</td><td>13,069</td><td>100%</td><td>100%</td><td>0.12</td></tr>
 <tr><td>serena</td><td>java</td><td>6</td><td>113,237/155,271</td><td>26</td><td>1,648</td><td>7</td><td>1</td><td>29.6s/41.3s</td><td>7</td><td>12,916</td><td>58%</td><td>33%</td><td>0.23</td></tr>
 <tr><td>serena</td><td>python</td><td>15</td><td>61,022/153,717</td><td>15</td><td>1,866</td><td>5</td><td>1</td><td>17.5s/37.0s</td><td>5</td><td>13,170</td><td>77%</td><td>100%</td><td>0.59</td></tr>
@@ -78,6 +85,7 @@
 <tr><td>graphify-federated</td><td>gpt-6-luna</td><td>40</td><td>241,476/547,607</td><td>22</td><td>2,620</td><td>8</td><td>1</td><td>41.7s/83.2s</td><td>8</td><td>33,727</td><td>85%</td><td>—</td><td>0.76</td></tr>
 <tr><td>graphify-federated</td><td>mai-code-1.1-flash</td><td>2</td><td>28,798/29,146</td><td>5,502</td><td>224</td><td>2</td><td>1</td><td>11.1s/11.7s</td><td>2</td><td>2,422</td><td>75%</td><td>—</td><td>0.02</td></tr>
 <tr><td>graphify-guard</td><td>gpt-6-luna</td><td>45</td><td>242,535/453,978</td><td>24</td><td>2,272</td><td>8</td><td>1</td><td>37.8s/74.4s</td><td>8</td><td>13,960</td><td>83%</td><td>93%</td><td>0.48</td></tr>
+<tr><td>graphify-lean</td><td>gpt-6-luna</td><td>36</td><td>140,324/223,982</td><td>24</td><td>2,034</td><td>8</td><td>1</td><td>33.3s/49.5s</td><td>8</td><td>16,777</td><td>90%</td><td>100%</td><td>0.34</td></tr>
 <tr><td>serena</td><td>gpt-6-luna</td><td>39</td><td>89,461/176,951</td><td>15</td><td>1,277</td><td>5</td><td>1</td><td>22.9s/44.1s</td><td>5</td><td>10,698</td><td>85%</td><td>86%</td><td>0.53</td></tr>
 <tr><td>serena</td><td>gpt-6-luna,copilot-search-a</td><td>6</td><td>97,702/123,866</td><td>14,625</td><td>2,778</td><td>7</td><td>1</td><td>23.2s/32.0s</td><td>7</td><td>27,845</td><td>92%</td><td>100%</td><td>0.30</td></tr></table>
 <h2>KB currency (artifact staleness at query time, commits behind HEAD)</h2>
@@ -86,6 +94,7 @@
 <tr><td>graphify</td><td>0</td><td>0</td><td>1</td></tr>
 <tr><td>graphify-federated</td><td>0</td><td>0</td><td>1</td></tr>
 <tr><td>graphify-guard</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>graphify-lean</td><td>0</td><td>0</td><td>1</td></tr>
 <tr><td>serena</td><td>0</td><td>0</td><td>0</td></tr></table>
 <h2>Per task</h2>
 <table><tr><td>task</td><td>arm</td><td>n</td><td>tokens p50</td><td>calls p50</td><td>wall p50</td><td>correctness</td><td>tokens CV</td></tr>
@@ -122,6 +131,7 @@
 <tr><td>svc-001</td><td>baseline</td><td>3</td><td>45,877</td><td>3</td><td>9.1s</td><td>100%</td><td>0.18</td></tr>
 <tr><td>svc-001</td><td>graphify</td><td>3</td><td>101,874</td><td>4</td><td>13.0s</td><td>100%</td><td>0.23</td></tr>
 <tr><td>svc-001</td><td>graphify-guard</td><td>3</td><td>131,635</td><td>5</td><td>17.0s</td><td>100%</td><td>0.26</td></tr>
+<tr><td>svc-001</td><td>graphify-lean</td><td>3</td><td>104,357</td><td>6</td><td>15.3s</td><td>100%</td><td>0.09</td></tr>
 <tr><td>svc-001</td><td>serena</td><td>3</td><td>46,085</td><td>3</td><td>10.4s</td><td>100%</td><td>0.19</td></tr>
 <tr><td>svc-002</td><td>baseline</td><td>3</td><td>99,654</td><td>5</td><td>18.5s</td><td>100%</td><td>0.28</td></tr>
 <tr><td>svc-002</td><td>graphify</td><td>3</td><td>256,304</td><td>8</td><td>32.2s</td><td>100%</td><td>0.26</td></tr>
@@ -130,10 +140,12 @@
 <tr><td>svc-003</td><td>baseline</td><td>3</td><td>95,045</td><td>6</td><td>32.5s</td><td>33%</td><td>0.08</td></tr>
 <tr><td>svc-003</td><td>graphify</td><td>3</td><td>275,611</td><td>9</td><td>46.5s</td><td>17%</td><td>0.24</td></tr>
 <tr><td>svc-003</td><td>graphify-guard</td><td>3</td><td>407,615</td><td>12</td><td>65.4s</td><td>33%</td><td>0.09</td></tr>
+<tr><td>svc-003</td><td>graphify-lean</td><td>3</td><td>241,883</td><td>12</td><td>48.5s</td><td>50%</td><td>0.16</td></tr>
 <tr><td>svc-003</td><td>serena</td><td>3</td><td>98,380</td><td>5</td><td>29.9s</td><td>33%</td><td>0.25</td></tr>
 <tr><td>svc-004</td><td>baseline</td><td>3</td><td>62,162</td><td>6</td><td>17.6s</td><td>100%</td><td>0.13</td></tr>
 <tr><td>svc-004</td><td>graphify</td><td>3</td><td>205,086</td><td>7</td><td>31.3s</td><td>83%</td><td>0.16</td></tr>
 <tr><td>svc-004</td><td>graphify-guard</td><td>3</td><td>249,519</td><td>8</td><td>39.4s</td><td>83%</td><td>0.24</td></tr>
+<tr><td>svc-004</td><td>graphify-lean</td><td>3</td><td>157,838</td><td>8</td><td>36.7s</td><td>83%</td><td>0.19</td></tr>
 <tr><td>svc-004</td><td>serena</td><td>3</td><td>61,022</td><td>5</td><td>17.5s</td><td>100%</td><td>0.30</td></tr>
 <tr><td>svc-005</td><td>baseline</td><td>3</td><td>238,243</td><td>10</td><td>62.6s</td><td>50%</td><td>0.21</td></tr>
 <tr><td>svc-005</td><td>graphify</td><td>3</td><td>444,958</td><td>11</td><td>82.2s</td><td>50%</td><td>0.21</td></tr>
@@ -141,6 +153,7 @@
 <tr><td>svc-006</td><td>baseline</td><td>3</td><td>30,321</td><td>2</td><td>6.7s</td><td>50%</td><td>0.38</td></tr>
 <tr><td>svc-006</td><td>graphify</td><td>3</td><td>130,764</td><td>5</td><td>15.5s</td><td>50%</td><td>0.25</td></tr>
 <tr><td>svc-006</td><td>graphify-guard</td><td>3</td><td>101,062</td><td>4</td><td>11.6s</td><td>67%</td><td>0.15</td></tr>
+<tr><td>svc-006</td><td>graphify-lean</td><td>3</td><td>103,046</td><td>6</td><td>14.7s</td><td>83%</td><td>0.20</td></tr>
 <tr><td>svc-006</td><td>serena</td><td>3</td><td>30,462</td><td>2</td><td>5.5s</td><td>50%</td><td>0.00</td></tr>
 <tr><td>svc-007</td><td>baseline</td><td>3</td><td>83,384</td><td>5</td><td>20.1s</td><td>83%</td><td>0.25</td></tr>
 <tr><td>svc-007</td><td>graphify</td><td>3</td><td>418,048</td><td>12</td><td>83.9s</td><td>83%</td><td>0.25</td></tr>
@@ -148,6 +161,7 @@
 <tr><td>svc-008</td><td>baseline</td><td>3</td><td>177,017</td><td>9</td><td>36.9s</td><td>100%</td><td>0.02</td></tr>
 <tr><td>svc-008</td><td>graphify</td><td>3</td><td>282,123</td><td>9</td><td>44.9s</td><td>100%</td><td>0.16</td></tr>
 <tr><td>svc-008</td><td>graphify-guard</td><td>3</td><td>240,496</td><td>8</td><td>37.8s</td><td>100%</td><td>0.16</td></tr>
+<tr><td>svc-008</td><td>graphify-lean</td><td>3</td><td>229,663</td><td>11</td><td>42.4s</td><td>100%</td><td>0.03</td></tr>
 <tr><td>svc-008</td><td>serena</td><td>3</td><td>163,444</td><td>8</td><td>37.5s</td><td>100%</td><td>0.08</td></tr>
 <tr><td>svc-009</td><td>baseline</td><td>3</td><td>110,979</td><td>6</td><td>30.0s</td><td>100%</td><td>0.17</td></tr>
 <tr><td>svc-009</td><td>graphify</td><td>3</td><td>202,849</td><td>7</td><td>32.1s</td><td>100%</td><td>0.09</td></tr>
@@ -160,22 +174,27 @@
 <tr><td>web-001</td><td>baseline</td><td>3</td><td>60,649</td><td>4</td><td>11.9s</td><td>100%</td><td>0.12</td></tr>
 <tr><td>web-001</td><td>graphify</td><td>3</td><td>131,629</td><td>5</td><td>17.5s</td><td>100%</td><td>0.10</td></tr>
 <tr><td>web-001</td><td>graphify-guard</td><td>3</td><td>131,339</td><td>5</td><td>15.9s</td><td>100%</td><td>0.18</td></tr>
+<tr><td>web-001</td><td>graphify-lean</td><td>3</td><td>82,088</td><td>5</td><td>13.5s</td><td>100%</td><td>0.10</td></tr>
 <tr><td>web-001</td><td>serena</td><td>3</td><td>53,957</td><td>3</td><td>11.2s</td><td>100%</td><td>0.12</td></tr>
 <tr><td>web-002</td><td>baseline</td><td>3</td><td>62,697</td><td>5</td><td>15.7s</td><td>100%</td><td>0.23</td></tr>
 <tr><td>web-002</td><td>graphify</td><td>3</td><td>135,639</td><td>5</td><td>21.5s</td><td>100%</td><td>0.19</td></tr>
 <tr><td>web-002</td><td>graphify-guard</td><td>3</td><td>163,877</td><td>6</td><td>23.4s</td><td>67%</td><td>0.14</td></tr>
+<tr><td>web-002</td><td>graphify-lean</td><td>3</td><td>101,944</td><td>6</td><td>16.3s</td><td>100%</td><td>0.01</td></tr>
 <tr><td>web-002</td><td>serena</td><td>3</td><td>62,255</td><td>4</td><td>16.0s</td><td>100%</td><td>0.01</td></tr>
 <tr><td>web-003</td><td>baseline</td><td>3</td><td>88,730</td><td>5</td><td>23.5s</td><td>100%</td><td>0.07</td></tr>
 <tr><td>web-003</td><td>graphify</td><td>3</td><td>164,425</td><td>6</td><td>30.2s</td><td>100%</td><td>0.17</td></tr>
 <tr><td>web-003</td><td>graphify-guard</td><td>3</td><td>223,158</td><td>8</td><td>28.2s</td><td>100%</td><td>0.46</td></tr>
+<tr><td>web-003</td><td>graphify-lean</td><td>3</td><td>128,293</td><td>7</td><td>33.2s</td><td>100%</td><td>0.12</td></tr>
 <tr><td>web-003</td><td>serena</td><td>3</td><td>90,028</td><td>5</td><td>20.9s</td><td>100%</td><td>0.19</td></tr>
 <tr><td>web-004</td><td>baseline</td><td>3</td><td>90,665</td><td>7</td><td>24.2s</td><td>100%</td><td>0.11</td></tr>
 <tr><td>web-004</td><td>graphify</td><td>3</td><td>235,652</td><td>8</td><td>42.1s</td><td>100%</td><td>0.23</td></tr>
 <tr><td>web-004</td><td>graphify-guard</td><td>3</td><td>503,294</td><td>13</td><td>92.7s</td><td>83%</td><td>0.39</td></tr>
+<tr><td>web-004</td><td>graphify-lean</td><td>3</td><td>144,151</td><td>8</td><td>37.7s</td><td>100%</td><td>0.13</td></tr>
 <tr><td>web-004</td><td>serena</td><td>3</td><td>86,540</td><td>5</td><td>22.9s</td><td>100%</td><td>0.13</td></tr>
 <tr><td>web-005</td><td>baseline</td><td>3</td><td>86,903</td><td>5</td><td>18.6s</td><td>83%</td><td>0.14</td></tr>
 <tr><td>web-005</td><td>graphify</td><td>3</td><td>180,819</td><td>6</td><td>29.1s</td><td>67%</td><td>0.31</td></tr>
 <tr><td>web-005</td><td>graphify-guard</td><td>3</td><td>452,858</td><td>13</td><td>66.7s</td><td>50%</td><td>0.02</td></tr>
+<tr><td>web-005</td><td>graphify-lean</td><td>3</td><td>136,144</td><td>7</td><td>22.2s</td><td>67%</td><td>0.15</td></tr>
 <tr><td>web-005</td><td>serena</td><td>3</td><td>85,694</td><td>5</td><td>18.6s</td><td>83%</td><td>0.12</td></tr>
 <tr><td>web-006</td><td>baseline</td><td>3</td><td>129,290</td><td>6</td><td>32.8s</td><td>50%</td><td>0.10</td></tr>
 <tr><td>web-006</td><td>graphify</td><td>3</td><td>206,814</td><td>7</td><td>40.1s</td><td>50%</td><td>0.06</td></tr>
@@ -186,10 +205,12 @@
 <tr><td>web-009</td><td>baseline</td><td>3</td><td>160,040</td><td>8</td><td>30.7s</td><td>67%</td><td>0.08</td></tr>
 <tr><td>web-009</td><td>graphify</td><td>3</td><td>279,125</td><td>9</td><td>37.2s</td><td>100%</td><td>0.12</td></tr>
 <tr><td>web-009</td><td>graphify-guard</td><td>3</td><td>282,080</td><td>9</td><td>45.5s</td><td>100%</td><td>0.02</td></tr>
+<tr><td>web-009</td><td>graphify-lean</td><td>3</td><td>176,841</td><td>9</td><td>34.8s</td><td>100%</td><td>0.07</td></tr>
 <tr><td>web-009</td><td>serena</td><td>3</td><td>173,671</td><td>8</td><td>44.0s</td><td>100%</td><td>0.09</td></tr>
 <tr><td>web-010</td><td>baseline</td><td>3</td><td>148,095</td><td>8</td><td>49.5s</td><td>100%</td><td>0.05</td></tr>
 <tr><td>web-010</td><td>graphify</td><td>3</td><td>268,022</td><td>9</td><td>60.9s</td><td>100%</td><td>0.12</td></tr>
 <tr><td>web-010</td><td>graphify-guard</td><td>3</td><td>276,869</td><td>9</td><td>65.0s</td><td>100%</td><td>0.07</td></tr>
+<tr><td>web-010</td><td>graphify-lean</td><td>3</td><td>201,654</td><td>10</td><td>57.7s</td><td>100%</td><td>0.05</td></tr>
 <tr><td>web-010</td><td>serena</td><td>3</td><td>190,900</td><td>8</td><td>69.0s</td><td>100%</td><td>0.11</td></tr></table>
 <p>Models seen: copilot-search-a, gpt-6-luna, mai-code-1.1-flash · Copilot versions: 1.0.105</p>
 <p>---</p>
