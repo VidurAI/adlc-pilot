@@ -201,3 +201,6 @@ everything here is reversible by the pilot owner.
 
 ## 2026-11-01 — devcontainer is optional, not required
 The kit never read the devcontainer; the pilot ran entirely on the dev machine. Made that explicit: `adlc init --no-devcontainer`, doctor WARN not FAIL, ADOPT.md bare-machine prerequisites. Devcontainer stays the distributable for teams with Docker. Unreleased in CHANGELOG; tag on next release, not for a flag.
+
+## 2026-11-01 — devcontainer removed from the kit (supersedes the 2026-11-01 "optional" entry)
+User: devcontainers are not approved for their use. Opt-out flag was the wrong shape; removed the Dockerfile, the devcontainer template, the `--no-devcontainer` flag and the doctor row entirely. `adlc-regress.yml` now installs uv + Node + Copilot CLI 1.0.105 + the kit on a plain ubuntu runner, with a `setup` input for the repo's own toolchain. INSTALL_MINUTES.md moved to the kit root and is now the per-machine cost sheet. Kit tagged v0.1.3. All four Kestrel repos: `.devcontainer/` removed, `adlc init` rerun (kit 0.1.3), graphs re-stamped, project/org graphs re-federated; stale/lint/doctor green.
